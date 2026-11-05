@@ -3,11 +3,11 @@
   "name": "coverage_status",
   "position": {
     "x": 1278,
-    "y": 674,
-    "z": 9000,
-    "height": 376,
+    "y": 660,
+    "z": 1009,
+    "height": 390,
     "width": 598,
-    "tabOrder": 9000
+    "tabOrder": 9
   },
   "visual": {
     "visualType": "clusteredBarChart",

@@ -3,9 +3,9 @@
   "name": "slicer_date",
   "position": {
     "x": 30,
-    "y": 24,
-    "z": 0,
-    "height": 82,
+    "y": 66,
+    "z": 1000,
+    "height": 76,
     "width": 442,
     "tabOrder": 0
   },
@@ -33,6 +33,21 @@
           ]
         }
       }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Between'"
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "visualContainerObjects": {
       "title": [

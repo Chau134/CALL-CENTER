@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "forecast_kpi_summary",
   "position": {
     "x": 30,
-    "y": 126,
-    "z": 5000,
-    "height": 170,
+    "y": 158,
+    "z": 1005,
+    "height": 150,
     "width": 1846,
-    "tabOrder": 5000
+    "tabOrder": 5
   },
   "visual": {
     "visualType": "cardVisual",

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "volume_service_level",
   "position": {
-    "x": 966,
-    "y": 320,
-    "z": 7000,
-    "height": 330,
+    "x": 960,
+    "y": 358.33333333333337,
+    "z": 1007,
+    "height": 320,
     "width": 910,
-    "tabOrder": 7000
+    "tabOrder": 7
   },
   "visual": {
     "visualType": "lineClusteredColumnComboChart",

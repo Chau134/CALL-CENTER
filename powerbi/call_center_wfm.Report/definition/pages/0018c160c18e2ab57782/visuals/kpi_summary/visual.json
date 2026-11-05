@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "kpi_summary",
   "position": {
     "x": 30,
-    "y": 126,
-    "z": 5000,
-    "height": 170,
+    "y": 158,
+    "z": 1005,
+    "height": 150,
     "width": 1846,
-    "tabOrder": 5000
+    "tabOrder": 5
   },
   "visual": {
     "visualType": "cardVisual",
@@ -104,6 +104,46 @@
               "expr": {
                 "Literal": {
                   "Value": "'Executive KPI Summary'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "showTooltipButton": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeaderTooltip": [
+        {
+          "properties": {
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Default'"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'AHT Proxy = total service_seconds / valid answered calls. Source data has no hold time or after-call work (ACW), so this is not full operational AHT.'"
                 }
               }
             }

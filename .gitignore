@@ -23,6 +23,7 @@ data/synthetic/*
 # Power BI temporary files
 *.pbit.tmp
 ~$*.pbix
+~$*.pptx
 powerbi/*.pbix
 powerbi/*.bim
 powerbi/backups/

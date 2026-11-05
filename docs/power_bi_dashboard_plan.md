@@ -634,7 +634,7 @@ Không publish dashboard nếu totals không khớp hoặc actual forecast volum
 - [ ] Model comparison dùng fold `ALL`, scope `overall`.
 - [ ] Staffing planned và actualized được gắn nhãn riêng.
 - [ ] Không hiển thị staffing gap/adherence/occupancy giả.
-- [ ] Ba trang có slicer, tooltip và navigation nhất quán.
+- [x] Ba trang có slicer, tooltip và navigation nhất quán.
 - [ ] KPI toàn kỳ khớp PostgreSQL reconciliation.
 - [ ] Ba lát cắt QA khớp giữa CSV, SQL và Power BI.
 - [ ] README chỉ mô tả các chức năng dashboard đã hoàn thành thật.
@@ -649,20 +649,20 @@ Không publish dashboard nếu totals không khớp hoặc actual forecast volum
 
 Schema, tên cột, primary/foreign keys, grain, row counts, model selection và các mốc tại mục 10 đã được xác minh trực tiếp trên PostgreSQL bằng `src/validate_analytics_warehouse.py`. Readiness QA riêng cho Power BI phải được chạy lại sau mỗi thay đổi warehouse.
 
-Đã hoàn thành trong repository:
+Đã hoàn thành trong repository và Power BI Desktop:
 
 - PostgreSQL analytics schema và 9 marts;
 - KPI/serving views và reconciliation report;
 - Power BI theme JSON;
 - DAX measure library;
 - SQL và Python readiness checks;
-- kế hoạch relationships, pages và cross-layer QA.
+- semantic model với 10 warehouse objects, 13 relationships và 40 measures;
+- ba dashboard pages với 41 visuals;
+- 11 slicer phân loại dạng Dropdown và 3 slicer ngày dạng Between;
+- ba heatmap dùng conditional-formatting gradient;
+- ba nút điều hướng và một nút Reset Filters trên mỗi trang;
+- tooltip giải thích giới hạn của AHT Proxy trên các visual liên quan;
+- visual-level render QA và screenshots cho cả ba trang;
+- PBIR validation đạt `0 error`, `0 warning`.
 
-Chưa hoàn thành trong Power BI Desktop:
-
-- import tables vào PBIX;
-- tạo relationships và `_Measures`;
-- dựng visuals, tooltips, navigation;
-- chạy visual-level QA và chụp screenshots.
-
-Ưu tiên thao tác trong Desktop: (1) kết nối Import, (2) tạo relationships, (3) import theme/copy DAX, (4) đối soát 5 KPI cốt lõi, (5) dựng ba pages, (6) cross-layer QA. Không thiết kế visual KPI trước khi measures đối soát đạt yêu cầu.
+Còn lại cho vòng nghiệm thu nghiệp vụ: chạy lại các lát cắt đối soát CSV/SQL/Power BI sau lần refresh dữ liệu tiếp theo và ghi nhận insight cuối cùng cho portfolio.

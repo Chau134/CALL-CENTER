@@ -3,11 +3,11 @@
   "name": "service_aht",
   "position": {
     "x": 1278,
-    "y": 320,
-    "z": 7000,
-    "height": 330,
+    "y": 324,
+    "z": 1007,
+    "height": 320,
     "width": 598,
-    "tabOrder": 7000
+    "tabOrder": 7
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -67,6 +67,46 @@
               "expr": {
                 "Literal": {
                   "Value": "'AHT Proxy by Service Type'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "showTooltipButton": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeaderTooltip": [
+        {
+          "properties": {
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Default'"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'AHT Proxy = total service_seconds / valid answered calls. Source data has no hold time or after-call work (ACW), so this is not full operational AHT.'"
                 }
               }
             }

@@ -8,6 +8,7 @@
 - `setup_relationships.csx`: sửa/đảm bảo hai relationship Service Type theo star schema đã chốt.
 - `build_executive_overview.ps1`: tạo page Executive Overview và 9 PBIR visuals.
 - `build_remaining_dashboard_pages.ps1`: tạo hai pages Forecast/Staffing và Service Mix/Data Quality với 20 PBIR visuals.
+- `refine_dashboard_interactions.ps1`: thêm dropdown slicers, heatmap gradients, AHT Proxy tooltip, page navigation và Reset Filters.
 - `call_center_wfm.pbip`: Power BI Project chính; report dùng PBIR và semantic model dùng TMDL.
 - `../docs/power_bi_dashboard_plan.md`: relationships, page layout và QA checklist.
 - `../sql/04_powerbi_model_qa.sql`: SQL kiểm tra model readiness.
@@ -21,7 +22,7 @@
 5. Import theme JSON.
 6. Đối soát năm KPI Executive; `measures.dax` là bản tham chiếu để review/copy thủ công khi cần.
 7. Save As Power BI Project `call_center_wfm.pbip`.
-8. Chạy hai PBIR build scripts, áp dụng external changes trong Desktop và hoàn thành cross-layer QA.
+8. Chạy ba PBIR scripts, áp dụng external changes trong Desktop và hoàn thành cross-layer QA.
 
 Power BI Desktop không hỗ trợ import trực tiếp một file DAX chứa nhiều measures nếu không có external tool. File `measures.dax` là nguồn copy/paste có kiểm soát; không chạy toàn bộ file như một DAX query.
 
@@ -51,6 +52,7 @@ Trong **File → Options and settings → Options → Current File → Data Load
 ```powershell
 & 'C:\A\CALL-CENTER\powerbi\build_executive_overview.ps1'
 & 'C:\A\CALL-CENTER\powerbi\build_remaining_dashboard_pages.ps1'
+& 'C:\A\CALL-CENTER\powerbi\refine_dashboard_interactions.ps1'
 ```
 
 Scripts tạo backup report definition trong `powerbi/backups/`, dùng UTF-8 không BOM và có thể chạy lại. Nếu project đang mở, chọn **Apply external changes**, kiểm tra ba pages rồi lưu project.

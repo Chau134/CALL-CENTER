@@ -3,11 +3,11 @@
   "name": "actual_vs_forecast",
   "position": {
     "x": 654,
-    "y": 320,
-    "z": 7000,
-    "height": 330,
+    "y": 324,
+    "z": 1007,
+    "height": 320,
     "width": 1222,
-    "tabOrder": 7000
+    "tabOrder": 7
   },
   "visual": {
     "visualType": "lineChart",

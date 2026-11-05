@@ -3,9 +3,9 @@
   "name": "slicer_model",
   "position": {
     "x": 30,
-    "y": 24,
-    "z": 0,
-    "height": 82,
+    "y": 66,
+    "z": 1000,
+    "height": 76,
     "width": 350,
     "tabOrder": 0
   },
@@ -35,48 +35,14 @@
       }
     },
     "objects": {
-      "general": [
+      "data": [
         {
           "properties": {
-            "filter": {
-              "filter": {
-                "Version": 2,
-                "From": [
-                  {
-                    "Name": "f",
-                    "Entity": "fact_model_evaluation",
-                    "Type": 0
-                  }
-                ],
-                "Where": [
-                  {
-                    "Condition": {
-                      "In": {
-                        "Expressions": [
-                          {
-                            "Column": {
-                              "Expression": {
-                                "SourceRef": {
-                                  "Source": "f"
-                                }
-                              },
-                              "Property": "model_name"
-                            }
-                          }
-                        ],
-                        "Values": [
-                          [
-                            {
-                              "Literal": {
-                                "Value": "'holt_winters_additive_damped'"
-                              }
-                            }
-                          ]
-                        ]
-                      }
-                    }
-                  }
-                ]
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
               }
             }
           }

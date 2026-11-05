@@ -3,11 +3,11 @@
   "name": "slicer_holiday",
   "position": {
     "x": 1526,
-    "y": 24,
-    "z": 4000,
-    "height": 82,
+    "y": 66,
+    "z": 1004,
+    "height": 76,
     "width": 350,
-    "tabOrder": 4000
+    "tabOrder": 4
   },
   "visual": {
     "visualType": "slicer",
@@ -33,6 +33,21 @@
           ]
         }
       }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "visualContainerObjects": {
       "title": [

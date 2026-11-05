@@ -3,9 +3,9 @@
   "name": "slicer_date",
   "position": {
     "x": 30,
-    "y": 24,
-    "z": 0,
-    "height": 82,
+    "y": 66,
+    "z": 1000,
+    "height": 76,
     "width": 350,
     "tabOrder": 0
   },
@@ -38,53 +38,11 @@
       "data": [
         {
           "properties": {
-            "endDate": {
+            "mode": {
               "expr": {
                 "Literal": {
-                  "Value": "datetime'1999-12-10T00:00:00'"
+                  "Value": "'Between'"
                 }
-              }
-            }
-          }
-        }
-      ],
-      "general": [
-        {
-          "properties": {
-            "filter": {
-              "filter": {
-                "Version": 2,
-                "From": [
-                  {
-                    "Name": "d",
-                    "Entity": "dim_date",
-                    "Type": 0
-                  }
-                ],
-                "Where": [
-                  {
-                    "Condition": {
-                      "Comparison": {
-                        "ComparisonKind": 3,
-                        "Left": {
-                          "Column": {
-                            "Expression": {
-                              "SourceRef": {
-                                "Source": "d"
-                              }
-                            },
-                            "Property": "calendar_date"
-                          }
-                        },
-                        "Right": {
-                          "Literal": {
-                            "Value": "datetime'1999-12-11T00:00:00'"
-                          }
-                        }
-                      }
-                    }
-                  }
-                ]
               }
             }
           }

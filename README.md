@@ -1,8 +1,8 @@
 # Call Center Workforce Management & Analytics
 
-Dự án portfolio mô phỏng quy trình Workforce Management (WFM) cho một Call Center: từ dữ liệu cuộc gọi, dự báo volume, tính nhu cầu nhân sự, theo dõi staffing gap đến dashboard vận hành.
+Dự án portfolio mô phỏng quy trình Workforce Management (WFM) cho một Call Center: từ dữ liệu cuộc gọi, dự báo volume, tính staffing requirement đến dashboard vận hành.
 
-> Trạng thái hiện tại: dữ liệu Technion đủ 12 tháng đã được audit, ETL và đối soát; foundation marts đủ 17.520 interval đã hoàn thành. Sáu rolling backtest folds, bốn models (gồm XGBoost), AHT proxy forecast và workload-based staffing requirement đã chạy thật. Chín marts đã được load vào PostgreSQL `analytics` với 9 KPI/Power BI views và đối soát đạt. Baseline trung bình 4 tuần hiện được chọn theo WAPE. Chưa tạo schedule/attendance/state synthetic và chưa làm Power BI.
+> Trạng thái hiện tại: dữ liệu Technion đủ 12 tháng đã được audit, ETL và đối soát; foundation marts đủ 17.520 interval đã hoàn thành. Sáu rolling backtest folds, bốn models (gồm XGBoost), AHT proxy forecast và workload-based staffing requirement đã chạy thật. Chín marts đã được load vào PostgreSQL `analytics` với 9 KPI/Power BI views và đối soát đạt. Baseline trung bình 4 tuần hiện được chọn theo WAPE. Power BI đã hoàn thành 3 trang với 41 visuals. Chưa tạo schedule/attendance/state synthetic nên chưa tính staffing gap/adherence/occupancy thực tế.
 
 ## Mục tiêu MVP
 
@@ -36,6 +36,8 @@ Các quyết định đã khóa nằm trong:
 - [docs/postgresql_powerbi_guide.md](docs/postgresql_powerbi_guide.md): warehouse schema, loader, KPI views và hướng dẫn kết nối Power BI.
 - [docs/power_bi_dashboard_plan.md](docs/power_bi_dashboard_plan.md): data model, DAX measures, bố cục ba trang và checklist đối soát Power BI.
 - [powerbi/README.md](powerbi/README.md): theme, DAX measure library và thứ tự thao tác trong Power BI Desktop.
+- [presentation/CALL_CENTER_WFM_Project_Report.pptx](presentation/CALL_CENTER_WFM_Project_Report.pptx): báo cáo PowerPoint 14 slide sử dụng kết quả dashboard để trình bày dự án.
+- [presentation/README.md](presentation/README.md): nội dung deck, nguồn số liệu và cách tái tạo PPTX/PDF.
 
 ## Chạy và kiểm tra ETL
 

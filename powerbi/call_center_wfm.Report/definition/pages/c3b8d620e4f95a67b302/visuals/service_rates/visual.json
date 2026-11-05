@@ -3,11 +3,11 @@
   "name": "service_rates",
   "position": {
     "x": 654,
-    "y": 320,
-    "z": 6000,
-    "height": 330,
+    "y": 324,
+    "z": 1006,
+    "height": 320,
     "width": 600,
-    "tabOrder": 6000
+    "tabOrder": 6
   },
   "visual": {
     "visualType": "clusteredColumnChart",

@@ -3,11 +3,11 @@
   "name": "service_volume",
   "position": {
     "x": 30,
-    "y": 320,
-    "z": 5000,
-    "height": 330,
+    "y": 324,
+    "z": 1005,
+    "height": 320,
     "width": 600,
-    "tabOrder": 5000
+    "tabOrder": 5
   },
   "visual": {
     "visualType": "clusteredColumnChart",
