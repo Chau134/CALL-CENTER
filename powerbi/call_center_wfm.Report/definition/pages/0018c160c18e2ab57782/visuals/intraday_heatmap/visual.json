@@ -3,11 +3,11 @@
   "name": "intraday_heatmap",
   "position": {
     "x": 30,
-    "y": 674,
-    "z": 1008,
+    "y": 671.66666666666674,
+    "z": 8000,
     "height": 376,
     "width": 1846,
-    "tabOrder": 8
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "pivotTable",
