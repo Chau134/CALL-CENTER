@@ -1,0 +1,197 @@
+// Queue measures -------------------------------------------------------------
+
+Offered Calls =
+SUM(fact_queue_interval_complete[offered_calls])
+
+Agent Demand Calls =
+SUM(fact_queue_interval_complete[agent_demand_calls])
+
+Answered Calls =
+SUM(fact_queue_interval_complete[answered_calls])
+
+Abandoned Calls =
+SUM(fact_queue_interval_complete[abandoned_calls])
+
+Queue Abandoned Calls =
+SUM(fact_queue_interval_complete[queue_abandoned_calls])
+
+VRU Abandoned Calls =
+SUM(fact_queue_interval_complete[vru_abandoned_calls])
+
+Short Abandoned Calls =
+SUM(fact_queue_interval_complete[short_abandon_calls])
+
+Answer Rate =
+DIVIDE([Answered Calls], [Offered Calls])
+
+Abandon Rate =
+DIVIDE([Abandoned Calls], [Offered Calls])
+
+Short Abandon Rate =
+DIVIDE([Short Abandoned Calls], [Offered Calls])
+
+Service Level =
+DIVIDE(
+    SUM(fact_queue_interval_complete[answered_within_20s]),
+    SUM(fact_queue_interval_complete[service_level_denominator])
+)
+
+AHT Proxy Seconds =
+DIVIDE(
+    SUM(fact_queue_interval_complete[total_service_seconds_for_aht]),
+    SUM(fact_queue_interval_complete[aht_eligible_calls])
+)
+
+Average Wait Seconds All Calls =
+DIVIDE(
+    SUM(fact_queue_interval_complete[total_wait_seconds]),
+    [Offered Calls]
+)
+
+// Forecast measures ----------------------------------------------------------
+
+Selected Model Name =
+CALCULATE(
+    SELECTEDVALUE(fact_model_evaluation[model_name]),
+    fact_model_evaluation[is_selected_model] = TRUE(),
+    fact_model_evaluation[backtest_fold] = "ALL",
+    fact_model_evaluation[evaluation_scope] = "overall"
+)
+
+Selected Forecast Calls =
+CALCULATE(
+    SUM(fact_forecast_interval[forecast_agent_demand_calls]),
+    fact_forecast_interval[is_selected_model] = TRUE()
+)
+
+Selected Forecast Actual =
+CALCULATE(
+    SUM(fact_forecast_interval[actual_agent_demand_calls]),
+    fact_forecast_interval[is_selected_model] = TRUE()
+)
+
+Selected Forecast Absolute Error =
+CALCULATE(
+    SUM(fact_forecast_interval[absolute_error]),
+    fact_forecast_interval[is_selected_model] = TRUE()
+)
+
+Selected Forecast WAPE =
+DIVIDE(
+    [Selected Forecast Absolute Error],
+    [Selected Forecast Actual]
+)
+
+Selected Forecast Bias =
+DIVIDE(
+    [Selected Forecast Calls] - [Selected Forecast Actual],
+    [Selected Forecast Actual]
+)
+
+Selected Forecast MAE =
+CALCULATE(
+    AVERAGE(fact_forecast_interval[absolute_error]),
+    fact_forecast_interval[is_selected_model] = TRUE()
+)
+
+Selected Forecast RMSE =
+VAR MeanSquaredError =
+    CALCULATE(
+        AVERAGE(fact_forecast_interval[squared_error]),
+        fact_forecast_interval[is_selected_model] = TRUE()
+    )
+RETURN
+    SQRT(MeanSquaredError)
+
+Model WAPE (All Folds) =
+CALCULATE(
+    MAX(fact_model_evaluation[wape]),
+    fact_model_evaluation[backtest_fold] = "ALL",
+    fact_model_evaluation[evaluation_scope] = "overall"
+)
+
+Model Bias (All Folds) =
+CALCULATE(
+    MAX(fact_model_evaluation[bias]),
+    fact_model_evaluation[backtest_fold] = "ALL",
+    fact_model_evaluation[evaluation_scope] = "overall"
+)
+
+Model MAE (All Folds) =
+CALCULATE(
+    MAX(fact_model_evaluation[mae]),
+    fact_model_evaluation[backtest_fold] = "ALL",
+    fact_model_evaluation[evaluation_scope] = "overall"
+)
+
+Model RMSE (All Folds) =
+CALCULATE(
+    MAX(fact_model_evaluation[rmse]),
+    fact_model_evaluation[backtest_fold] = "ALL",
+    fact_model_evaluation[evaluation_scope] = "overall"
+)
+
+// Staffing measures ----------------------------------------------------------
+
+Planned Workload Hours =
+SUM(fact_staffing_requirement[workload_hours])
+
+Actualized Workload Hours =
+SUM(fact_staffing_requirement[actualized_workload_hours])
+
+Peak Productive Agents =
+MAX(fact_staffing_requirement[required_productive_agents])
+
+Peak Scheduled Agents =
+MAX(fact_staffing_requirement[required_scheduled_agents])
+
+Required Productive Agent Hours =
+SUMX(
+    fact_staffing_requirement,
+    fact_staffing_requirement[required_productive_agents]
+        * fact_staffing_requirement[interval_minutes] / 60
+)
+
+Required Scheduled Agent Hours =
+SUMX(
+    fact_staffing_requirement,
+    fact_staffing_requirement[required_scheduled_agents]
+        * fact_staffing_requirement[interval_minutes] / 60
+)
+
+Intervals Requiring Staff =
+CALCULATE(
+    COUNTROWS(fact_staffing_requirement),
+    fact_staffing_requirement[required_scheduled_agents] > 0
+)
+
+// Service-type measures ------------------------------------------------------
+
+Service Offered Calls =
+SUM(fact_service_type_interval[offered_calls])
+
+Service Agent Demand Calls =
+SUM(fact_service_type_interval[agent_demand_calls])
+
+Service Answered Calls =
+SUM(fact_service_type_interval[answered_calls])
+
+Service Abandoned Calls =
+SUM(fact_service_type_interval[abandoned_calls])
+
+Service Answer Rate =
+DIVIDE([Service Answered Calls], [Service Offered Calls])
+
+Service Abandon Rate =
+DIVIDE([Service Abandoned Calls], [Service Offered Calls])
+
+Service AHT Proxy Seconds =
+DIVIDE(
+    SUM(fact_service_type_interval[service_seconds_sum_for_aht]),
+    SUM(fact_service_type_interval[valid_for_aht_calls])
+)
+
+// Refresh metadata -----------------------------------------------------------
+
+Last Warehouse Load =
+MAX(vw_powerbi_refresh_status[loaded_at_utc])

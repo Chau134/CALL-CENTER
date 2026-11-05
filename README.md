@@ -34,6 +34,8 @@ Các quyết định đã khóa nằm trong:
 - [docs/missing_fields_plan.md](docs/missing_fields_plan.md): data dictionary và thứ tự bổ sung các trường còn thiếu.
 - [docs/forecast_staffing_methodology.md](docs/forecast_staffing_methodology.md): target, backtest, model selection, AHT proxy và staffing assumptions.
 - [docs/postgresql_powerbi_guide.md](docs/postgresql_powerbi_guide.md): warehouse schema, loader, KPI views và hướng dẫn kết nối Power BI.
+- [docs/power_bi_dashboard_plan.md](docs/power_bi_dashboard_plan.md): data model, DAX measures, bố cục ba trang và checklist đối soát Power BI.
+- [powerbi/README.md](powerbi/README.md): theme, DAX measure library và thứ tự thao tác trong Power BI Desktop.
 
 ## Chạy và kiểm tra ETL
 
@@ -60,6 +62,7 @@ Marts nằm tại `data/processed/technion/`. Báo cáo model gần nhất nằm
 ```powershell
 python src/load_analytics_marts.py
 python src/validate_analytics_warehouse.py
+python src/validate_powerbi_readiness.py
 ```
 
 DDL nằm trong `sql/01_analytics_schema.sql`; KPI views và query mẫu nằm trong `sql/02_powerbi_views.sql`, `sql/03_powerbi_kpi_queries.sql`. Báo cáo đối soát gần nhất nằm tại `reports/data_quality/postgres_warehouse_reconciliation.md`.

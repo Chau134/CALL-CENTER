@@ -1,0 +1,90 @@
+{
+  "generated_at_utc": "2026-11-05T11:19:54.563375+00:00",
+  "database": "call_center_wfm",
+  "status": "passed",
+  "checks": {
+    "dim_date_key_unique": true,
+    "dim_time_interval_key_unique": true,
+    "dim_queue_key_unique": true,
+    "dim_service_type_key_unique": true,
+    "selected_forecast_targets_unique": true,
+    "one_aggregate_evaluation_per_model": true,
+    "staffing_targets_unique": true,
+    "service_type_reconciles_to_queue": true,
+    "queue_benchmarks_match": true,
+    "executive_kpis_available": true,
+    "refresh_metadata_available": true,
+    "refresh_rows_available": true
+  },
+  "details": {
+    "dim_date_key_unique": {
+      "rows": 365,
+      "distinct_keys": 365,
+      "null_keys": 0
+    },
+    "dim_time_interval_key_unique": {
+      "rows": 48,
+      "distinct_keys": 48,
+      "null_keys": 0
+    },
+    "dim_queue_key_unique": {
+      "rows": 1,
+      "distinct_keys": 1,
+      "null_keys": 0
+    },
+    "dim_service_type_key_unique": {
+      "rows": 6,
+      "distinct_keys": 6,
+      "null_keys": 0
+    },
+    "selected_forecast": {
+      "rows": 2016,
+      "distinct_targets": 2016,
+      "runs": 6,
+      "models": 1
+    },
+    "aggregate_evaluation": {
+      "rows": 4,
+      "models": 4,
+      "selected_rows": 1
+    },
+    "staffing": {
+      "rows": 336,
+      "distinct_targets": 336,
+      "runs": 1,
+      "models": 1,
+      "intervals_requiring_staff": 205,
+      "peak_productive_agents": 15,
+      "peak_scheduled_agents": 22,
+      "planned_workload_hours": 531.072935
+    },
+    "queue_totals": [
+      440844,
+      417149,
+      353143,
+      87701
+    ],
+    "service_totals": [
+      440844,
+      417149,
+      353143,
+      87701
+    ],
+    "executive_kpis": {
+      "answer_rate": 0.8010611463465535,
+      "abandon_rate": 0.19893885365344657,
+      "service_level": 0.4646313160951601,
+      "aht_proxy_seconds": 194.25192132869657
+    },
+    "refresh_columns": [
+      "database_name",
+      "database_user_name",
+      "load_id",
+      "loaded_at_utc",
+      "loader_version",
+      "source_directory",
+      "source_sha256",
+      "table_row_counts"
+    ]
+  }
+}

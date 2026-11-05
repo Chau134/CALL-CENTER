@@ -53,6 +53,7 @@ Tất cả ratio được tính từ tổng tử số chia tổng mẫu số. Kh
 python src/bootstrap_database.py
 python src/load_analytics_marts.py
 python src/validate_analytics_warehouse.py
+python src/validate_powerbi_readiness.py
 ```
 
 DDL và SQL KPI:
