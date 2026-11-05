@@ -300,7 +300,7 @@ Xuất `reports/data_quality_report.csv`; không chỉ hiển thị kết quả 
 
 ### Bước 4 — Làm sạch và tạo interval mart
 
-**Trạng thái: đã hoàn thành phần sửa lỗi, chuẩn hóa, dẫn xuất và tổng hợp các interval có quan sát.** Đối soát nằm tại `reports/data_quality/etl_reconciliation.json` và `.md`. Chưa reindex interval không có cuộc gọi và chưa bổ sung các trường còn thiếu; thực hiện sau khi người dùng duyệt kết quả ETL.
+**Trạng thái: hoàn thành.** Đã tạo đủ 17.520 wall-clock interval, queue mart, service-type mart, calendar/time/queue dimensions, coverage và DST flags. Đối soát nằm tại `reports/data_quality/foundation_marts_reconciliation.json` và `.md`.
 
 - Parse timestamp và chuẩn hóa timezone.
 - Tạo `date_key`, `interval_start`, `interval_key`.
@@ -331,6 +331,8 @@ Mỗi biểu đồ phải có một câu kết luận nghiệp vụ, không ch�
 
 ### Bước 6 — Thiết kế backtesting
 
+**Trạng thái: hoàn thành.** Pipeline dùng 6 rolling folds, mỗi fold 7 ngày; không random split.
+
 Ví dụ với 180 ngày:
 
 - Train ban đầu: 12 tuần.
@@ -343,6 +345,8 @@ Tính metric tổng và theo weekday/interval. Không dùng random train-test sp
 
 ### Bước 7 — Xây baseline trước
 
+**Trạng thái: hoàn thành.** Đã chạy seasonal naive 7 ngày và trung bình cùng weekday/interval của 4 tuần.
+
 Tối thiểu gồm:
 
 - Last value.
@@ -352,6 +356,8 @@ Tối thiểu gồm:
 Baseline tốt nhất là mốc để mô hình nâng cao phải vượt qua. Nếu Holt-Winters không vượt baseline ổn định, giữ baseline và giải thích trung thực.
 
 ### Bước 8 — Huấn luyện và chọn forecast model
+
+**Trạng thái: hoàn thành phiên bản MVP.** Baseline trung bình 4 tuần được chọn với aggregate WAPE 0,1795; Holt–Winters không vượt baseline.
 
 Thử Holt-Winters với daily/weekly seasonality phù hợp dữ liệu. SARIMA là stretch goal. Lưu cho mỗi forecast:
 
@@ -365,6 +371,8 @@ Chọn model dựa trên WAPE + bias + độ ổn định qua folds, không ch�
 
 ### Bước 9 — Forecast AHT
 
+**Trạng thái: hoàn thành với AHT proxy.** Dùng weighted same-weekday/interval history và fallback trailing 28 ngày, không dùng actual AHT tương lai.
+
 MVP có thể dùng median AHT của cùng weekday/interval trong 4 tuần gần nhất, có floor/ceiling hợp lý. Không dùng actual AHT tương lai để tính required staffing vì đó là leakage.
 
 So sánh hai kịch bản:
@@ -373,6 +381,8 @@ So sánh hai kịch bản:
 - `actualized staffing analysis`: actual volume × actual AHT, chỉ dùng hậu kiểm.
 
 ### Bước 10 — Tính staffing requirement
+
+**Trạng thái: hoàn thành workload-based baseline.** Đã tạo 336 interval requirement cho fold cuối; chưa phải Erlang C và chưa có scheduled/available staffing thực tế.
 
 Implement hàm thuần trong `src/staffing.py`, nhận volume, AHT, interval, occupancy và shrinkage. Viết unit test cho:
 

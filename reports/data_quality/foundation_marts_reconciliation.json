@@ -1,0 +1,67 @@
+{
+  "report_version": "1.0.0",
+  "generated_at_utc": "2026-11-05T07:41:14.084437+00:00",
+  "etl_run_id": "foundation_v1_727afc5bdbfe",
+  "source_coverage_basis": {
+    "statement": "Technion documentation states the data archives all calls over 1999 and the VRU operated 24/7.",
+    "source_reference": "https://see-center.iem.technion.ac.il/databases/AnonymousBank/Data/AnonymousBank.pdf",
+    "monthly_files_verified": 12
+  },
+  "summary": {
+    "coverage_observed_with_calls": 12834,
+    "coverage_zero_filled_closed": 4003,
+    "coverage_zero_filled_operating": 683,
+    "dst_ambiguous": 2,
+    "dst_ends_ambiguous": 1,
+    "dst_ends_nonexistent": 1,
+    "dst_nonexistent": 2,
+    "dst_normal": 17514,
+    "queue_agent_demand_calls": 417149,
+    "queue_excluded_records": 3599,
+    "queue_offered_calls": 440844,
+    "queue_quarantine_records": 5,
+    "queue_raw_records": 444448,
+    "queue_rows": 17520,
+    "service_agent_demand_calls": 417149,
+    "service_offered_calls": 440844,
+    "service_rows": 105120
+  },
+  "invariants": {
+    "queue_rows_expected": 17520,
+    "service_rows_expected": 105120,
+    "clean_calls_expected": 440844,
+    "raw_rows_expected": 444448,
+    "excluded_rows_expected": 3599,
+    "quarantine_rows_expected": 5
+  },
+  "holiday_reference": {
+    "source": "https://www.hebcal.com/holidays/1999?i=on",
+    "interpretation": "Calendar observance only; not proof of closure or operational impact."
+  },
+  "outputs": {
+    "dim_date.csv.gz": {
+      "size_bytes": 5536,
+      "sha256": "267c26948e0d59525eaa657edab68a27eb835e7850f1867145a482de6cfa2dcf"
+    },
+    "dim_time_interval.csv.gz": {
+      "size_bytes": 751,
+      "sha256": "5f1a7ab219b05147c07c4da8e5078262a4616624fd6a3197fe48953647228e30"
+    },
+    "dim_queue.csv.gz": {
+      "size_bytes": 274,
+      "sha256": "18865bff3ab60d65ccbd54b5fcacf9ea56478c8fbd1a9e98d955f8631e808009"
+    },
+    "dim_service_type.csv.gz": {
+      "size_bytes": 390,
+      "sha256": "bdc75583dc3cb19e9da394aafa2787cd67df0cab29b84f0ca80aaf2653261dc4"
+    },
+    "fact_queue_interval_complete.csv.gz": {
+      "size_bytes": 677384,
+      "sha256": "a8aa69ec43ef8320be3f5bbaf7f4424eaa85f0e3e751087d3a49fd8ecbe55401"
+    },
+    "fact_service_type_interval.csv.gz": {
+      "size_bytes": 1132553,
+      "sha256": "f292566ec59cb4c3fd7ed96009474dcc6719bd45bb5aa19b6cc1e852917da7f8"
+    }
+  }
+}

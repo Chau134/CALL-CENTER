@@ -8,7 +8,7 @@ Tài liệu này là nguồn định nghĩa chính thức cho Python, SQL và Po
 |---|---|
 | Kênh | Inbound voice |
 | Queue MVP | `INBOUND_SUPPORT` |
-| Múi giờ | `Asia/Ho_Chi_Minh` |
+| Múi giờ | `Asia/Jerusalem` (giả định IANA cho dữ liệu call center tại Israel) |
 | Interval | 30 phút, căn từ phút 00 và 30 |
 | Forecast horizon | 7 ngày |
 | Service Level | 80% trong 20 giây (80/20) |
@@ -16,11 +16,11 @@ Tài liệu này là nguồn định nghĩa chính thức cho Python, SQL và Po
 | Occupancy target | tối đa 85% |
 | Shrinkage kế hoạch | 30% |
 | Staffing MVP | capacity-based; Erlang C là stretch goal |
-| Dữ liệu mặc định | synthetic, seed 42 |
+| Dữ liệu mặc định | Technion Anonymous Bank: observed + derived; synthetic chỉ dùng cho extension và phải gắn nhãn |
 
 ## 2. Quy tắc thời gian và grain
 
-- Tất cả timestamp nguồn được chuyển sang `Asia/Ho_Chi_Minh` trước khi tạo date/interval key.
+- Timestamp nguồn là local wall-clock tại Israel và được gắn giả định `Asia/Jerusalem`. Các giờ DST ambiguous/nonexistent phải có cờ riêng; không tự chọn UTC fold khi nguồn không đủ thông tin.
 - Interval là nửa kín `[start, end)`. Ví dụ `09:00:00` đến trước `09:30:00` thuộc interval 09:00.
 - Fact call có grain một cuộc gọi inbound. Transfer bị loại khỏi MVP; nếu xuất hiện phải được gắn cờ và báo cáo riêng.
 - Queue mart có grain `date × interval × queue`.
@@ -36,6 +36,16 @@ offered_calls = answered_calls + abandoned_calls
 ```
 
 Một `call_id` chỉ được tính một lần. Record test, outbound, duplicate hoặc timestamp không hợp lệ được loại theo reason code và phải xuất hiện trong DQ report.
+
+Trong bộ Technion, `offered_calls` đếm toàn bộ clean calls đi vào VRU. Để tính workload nhân sự, dùng metric riêng:
+
+```text
+agent_demand_calls = answered_calls + queue_abandoned_calls
+queue_abandoned_calls = abandoned calls with reached_queue = true
+vru_abandoned_calls = abandoned calls with reached_queue = false
+```
+
+`agent_demand_calls` là target forecast cho staffing. `vru_abandoned_calls` vẫn thuộc inbound volume nhưng không được chuyển thành workload của agent.
 
 ### Answer Rate
 
@@ -101,7 +111,7 @@ rmse = sqrt(mean(error^2))
 Với `interval_hours = 0.5`:
 
 ```text
-workload_hours = forecast_offered_calls * forecast_aht_seconds / 3600
+workload_hours = forecast_agent_demand_calls * forecast_aht_proxy_seconds / 3600
 productive_agents_required = ceil(
     workload_hours / (interval_hours * occupancy_target)
 )
@@ -118,7 +128,7 @@ schedule_gap = scheduled_headcount - scheduled_agents_required
 - `available_agents`: agent thực tế login và ở trạng thái có thể nhận call.
 - Gap âm là thiếu người; gap dương là dư người.
 - Mọi headcount requirement làm tròn lên.
-- Planned staffing dùng forecast volume và forecast AHT. Actualized analysis dùng actual volume/AHT và không được trình bày như kế hoạch đã biết trước.
+- Planned staffing dùng forecast `agent_demand_calls` và forecast AHT proxy. Actualized analysis dùng actual volume/AHT và không được trình bày như kế hoạch đã biết trước.
 
 ## 6. Attendance và agent metrics
 

@@ -2,12 +2,12 @@
 
 Dự án portfolio mô phỏng quy trình Workforce Management (WFM) cho một Call Center: từ dữ liệu cuộc gọi, dự báo volume, tính nhu cầu nhân sự, theo dõi staffing gap đến dashboard vận hành.
 
-> Trạng thái hiện tại: Bước 0–3 và phần ETL quan sát của Bước 4 đã hoàn thành. Nguồn lõi Technion “Anonymous Bank” đủ 12 tháng đã được audit, làm sạch, đối soát và tổng hợp theo interval 30 phút. Chưa bổ sung các trường còn thiếu, chưa tạo lưới interval volume 0 và chưa huấn luyện mô hình forecast.
+> Trạng thái hiện tại: dữ liệu Technion đủ 12 tháng đã được audit, ETL và đối soát; foundation marts đủ 17.520 interval đã hoàn thành. Sáu rolling backtest folds, ba models, AHT proxy forecast và workload-based staffing requirement đã chạy thật. Chưa tạo schedule/attendance/state synthetic, chưa load warehouse marts vào PostgreSQL và chưa làm Power BI.
 
 ## Mục tiêu MVP
 
 - Chuẩn hóa dữ liệu cuộc gọi theo interval 30 phút.
-- Dự báo số cuộc gọi offered theo interval và đánh giá bằng backtesting.
+- Dự báo `agent_demand_calls` theo interval và đánh giá bằng rolling-origin backtesting; `offered_calls` vẫn được giữ để báo cáo inbound traffic.
 - Tính productive agents và scheduled agents cần thiết, có xét occupancy và shrinkage.
 - So sánh required, scheduled và actual available headcount.
 - Phân tích KPI vận hành và hiệu suất agent/team.
@@ -31,6 +31,8 @@ Các quyết định đã khóa nằm trong:
 - [docs/data_sources.md](docs/data_sources.md): đánh giá và khuyến nghị nguồn dữ liệu cho Bước 2.
 - [docs/source_data_dictionary.md](docs/source_data_dictionary.md): giải thích 17 trường nguồn và cách xem dữ liệu an toàn.
 - [docs/etl_rules.md](docs/etl_rules.md): quy tắc sửa lỗi, phân luồng, trường dẫn xuất và interval mart.
+- [docs/missing_fields_plan.md](docs/missing_fields_plan.md): data dictionary và thứ tự bổ sung các trường còn thiếu.
+- [docs/forecast_staffing_methodology.md](docs/forecast_staffing_methodology.md): target, backtest, model selection, AHT proxy và staffing assumptions.
 
 ## Chạy và kiểm tra ETL
 
@@ -40,6 +42,17 @@ python src/validate_transformed_data.py
 ```
 
 Kết quả đối soát gần nhất nằm tại `reports/data_quality/etl_reconciliation.md`. Dữ liệu ETL nằm trong `data/interim/technion/`; raw source không bị chỉnh sửa.
+
+## Chạy foundation marts, forecast và staffing
+
+```powershell
+python src/build_foundation_marts.py
+python src/validate_foundation_marts.py
+python src/run_forecast_staffing.py
+python src/validate_forecast_staffing.py
+```
+
+Marts nằm tại `data/processed/technion/`. Báo cáo model gần nhất nằm tại `reports/model_evaluation/forecast_evaluation.md`.
 
 ## Kiến trúc dự kiến
 

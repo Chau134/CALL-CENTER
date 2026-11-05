@@ -12,6 +12,11 @@ scope:
     - INBOUND_SUPPORT
   interval_minutes: 30
   include_transfers: false
+  dayparts:
+    overnight: ["00:00", "07:00"]
+    morning: ["07:00", "12:00"]
+    afternoon: ["12:00", "18:00"]
+    evening: ["18:00", "24:00"]
   agent_staffed_hours:
     sunday: ["07:00", "24:00"]
     monday: ["07:00", "24:00"]
@@ -36,8 +41,9 @@ workforce:
   staffing_method_stretch: erlang_c
 
 forecast:
-  target: offered_calls
-  aht_target: aht_seconds
+  target: agent_demand_calls
+  reporting_volume: offered_calls
+  aht_target: aht_proxy_seconds
   horizon_days: 7
   minimum_training_days: 84
   backtest_folds: 6

@@ -46,6 +46,30 @@ raw = clean + excluded + quarantine
 
 File hiện chỉ chứa interval có ít nhất một cuộc gọi quan sát được. Việc tạo lưới interval đầy đủ và điền volume 0 được để sang bước kế tiếp; ETL này không tự tạo thêm dữ liệu quan sát.
 
+## Foundation marts sau call-level ETL
+
+`build_foundation_marts.py` tạo lưới đầy đủ 17.520 wall-clock interval và sáu service types. Zero-fill được phép vì tài liệu Technion ghi archive chứa toàn bộ calls trong 12 tháng và VRU hoạt động 24/7; pipeline đồng thời kiểm tra đủ 12 file, checksum, phạm vi năm và reconciliation.
+
+```text
+data/processed/technion/dim_date.csv.gz
+data/processed/technion/dim_time_interval.csv.gz
+data/processed/technion/dim_queue.csv.gz
+data/processed/technion/dim_service_type.csv.gz
+data/processed/technion/fact_queue_interval_complete.csv.gz
+data/processed/technion/fact_service_type_interval.csv.gz
+```
+
+Các trạng thái coverage gồm `observed_with_calls`, `observed_excluded_only`, `zero_filled_operating`, `zero_filled_closed` và `data_gap`. Chỉ interval có coverage được xác minh mới được zero-fill.
+
+Để tách inbound traffic khỏi workload nhân sự:
+
+```text
+agent_demand_calls = answered_calls + queue_abandoned_calls
+vru_abandoned_calls = abandoned_calls - queue_abandoned_calls
+```
+
+Forecast/staffing dùng `agent_demand_calls`; dashboard inbound traffic vẫn có thể dùng `offered_calls`.
+
 ## Kết quả xử lý hiện tại
 
 - 12 dòng 16 cột đã được sửa bằng quy tắc tách `priority + service_type` xác định.
@@ -82,4 +106,6 @@ Kiểm tra lại toàn bộ đầu ra:
 
 ```powershell
 python src/validate_transformed_data.py
+python src/build_foundation_marts.py
+python src/validate_foundation_marts.py
 ```

@@ -73,7 +73,7 @@ Mọi trường bổ sung phải có lineage rõ ràng như `data_origin`, `gene
 - Duration nguồn được giữ để đối chiếu với duration tính lại từ timestamp.
 - Record âm, sai thứ tự timestamp hoặc trùng composite key được đưa vào quarantine.
 - Không đổi ngày năm 1999 thành năm hiện đại.
-- Khi bắt đầu ETL, timezone dự án phải đổi từ `Asia/Ho_Chi_Minh` sang timezone nguồn phù hợp (`Asia/Jerusalem`) và ghi migration decision.
+- ETL đã đổi timezone dự án từ `Asia/Ho_Chi_Minh` sang giả định nguồn `Asia/Jerusalem`; migration decision, DST flags và giới hạn local-time đã được ghi trong tài liệu ETL/foundation marts.
 
 ## Các nguồn đã xem xét nhưng không chọn làm lõi
 

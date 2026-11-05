@@ -19,7 +19,9 @@ def test_config_has_locked_mvp_scope() -> None:
     assert config["scope"]["channel"] == "inbound_voice"
     assert config["scope"]["interval_minutes"] == 30
     assert config["forecast"]["horizon_days"] == 7
-    assert config["forecast"]["target"] == "offered_calls"
+    assert config["forecast"]["target"] == "agent_demand_calls"
+    assert config["forecast"]["reporting_volume"] == "offered_calls"
+    assert config["forecast"]["aht_target"] == "aht_proxy_seconds"
 
 
 def test_workforce_assumptions_are_valid_rates() -> None:
