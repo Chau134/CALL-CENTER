@@ -1,0 +1,67 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "slicer_coverage",
+  "position": {
+    "x": 1434,
+    "y": 24,
+    "z": 1003,
+    "height": 82,
+    "width": 442,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_service_type_interval"
+                    }
+                  },
+                  "Property": "coverage_status"
+                }
+              },
+              "queryRef": "fact_service_type_interval.coverage_status",
+              "nativeQueryRef": "coverage_status",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Coverage status'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "annotations": [
+    {
+      "name": "CALL_CENTER_WFM_AUTOGEN",
+      "value": "1.0.0"
+    }
+  ]
+}

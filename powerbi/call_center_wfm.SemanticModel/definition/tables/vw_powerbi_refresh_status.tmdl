@@ -1,0 +1,80 @@
+table vw_powerbi_refresh_status
+	lineageTag: 4cf9265c-02c7-44eb-bc63-5b47077b7b59
+
+	column load_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e7620982-2277-4cf0-857c-723b69e8198e
+		summarizeBy: sum
+		sourceColumn: load_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column loaded_at_utc
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 07a757a2-bd8c-4c2a-a6ad-aba4799ee6d6
+		summarizeBy: none
+		sourceColumn: loaded_at_utc
+
+		annotation SummarizationSetBy = Automatic
+
+	column loader_version
+		dataType: string
+		lineageTag: 97115b69-45df-4249-8d3c-cfe1d4124dc7
+		summarizeBy: none
+		sourceColumn: loader_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_directory
+		dataType: string
+		lineageTag: f7c9b9f0-4fef-437d-8e29-da6300668574
+		summarizeBy: none
+		sourceColumn: source_directory
+
+		annotation SummarizationSetBy = Automatic
+
+	column table_row_counts
+		dataType: string
+		lineageTag: 66915c20-57b6-4fd0-b6db-cc2f9b2550e0
+		summarizeBy: none
+		sourceColumn: table_row_counts
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_sha256
+		dataType: string
+		lineageTag: b0dbb318-a941-49f6-bc5e-2d45b4cf16cd
+		summarizeBy: none
+		sourceColumn: source_sha256
+
+		annotation SummarizationSetBy = Automatic
+
+	column database_name
+		dataType: string
+		lineageTag: 9c08728c-0ead-4c71-beb1-d3804e95e631
+		summarizeBy: none
+		sourceColumn: database_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column database_user_name
+		dataType: string
+		lineageTag: 32eab320-ab82-4c32-acc5-e1597d7c4244
+		summarizeBy: none
+		sourceColumn: database_user_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics vw_powerbi_refresh_status' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "call_center_wfm"),
+				    analytics_vw_powerbi_refresh_status = Source{[Schema="analytics",Item="vw_powerbi_refresh_status"]}[Data]
+				in
+				    analytics_vw_powerbi_refresh_status
+
+	annotation PBI_ResultType = Table
+

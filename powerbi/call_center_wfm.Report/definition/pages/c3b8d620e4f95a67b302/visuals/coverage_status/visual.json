@@ -1,0 +1,85 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "coverage_status",
+  "position": {
+    "x": 1278,
+    "y": 674,
+    "z": 1009,
+    "height": 376,
+    "width": 598,
+    "tabOrder": 9
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_service_type_interval"
+                    }
+                  },
+                  "Property": "coverage_status"
+                }
+              },
+              "queryRef": "fact_service_type_interval.coverage_status",
+              "nativeQueryRef": "Coverage status",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Service Offered Calls"
+                }
+              },
+              "queryRef": "_Measures.Service Offered Calls",
+              "nativeQueryRef": "Offered calls"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Coverage Status'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "annotations": [
+    {
+      "name": "CALL_CENTER_WFM_AUTOGEN",
+      "value": "1.0.0"
+    }
+  ]
+}

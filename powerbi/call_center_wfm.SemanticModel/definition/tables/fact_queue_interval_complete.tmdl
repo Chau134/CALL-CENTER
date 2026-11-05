@@ -1,0 +1,453 @@
+table fact_queue_interval_complete
+	lineageTag: 374c378a-3ce2-4cd0-8feb-fd31419d7b8d
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 861e6cf7-9cd6-4a4a-8a36-b8e67df4b6dd
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column interval_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8527d5c9-01c6-46c8-bef5-c363f3a6d994
+		summarizeBy: none
+		sourceColumn: interval_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column queue_id
+		dataType: string
+		lineageTag: fcce5b39-39c0-4868-bb8d-17e5ad254294
+		summarizeBy: none
+		sourceColumn: queue_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column local_interval_start
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3629ae31-7bb5-47ab-a941-ef2f589f4870
+		summarizeBy: none
+		sourceColumn: local_interval_start
+
+		annotation SummarizationSetBy = Automatic
+
+	column local_interval_end
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4adae2bf-66bb-4aef-aa62-d04987633347
+		summarizeBy: none
+		sourceColumn: local_interval_end
+
+		annotation SummarizationSetBy = Automatic
+
+	column interval_start_assumed
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fae558d2-65c6-47dd-8763-6d47e63bb076
+		summarizeBy: none
+		sourceColumn: interval_start_assumed
+
+		annotation SummarizationSetBy = Automatic
+
+	column interval_end_assumed
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6bf2d9c7-0c1b-4775-8060-0cc18aa6b996
+		summarizeBy: none
+		sourceColumn: interval_end_assumed
+
+		annotation SummarizationSetBy = Automatic
+
+	column interval_start_utc
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 93ba115b-0d4d-4ea9-8548-03ae15325f44
+		summarizeBy: none
+		sourceColumn: interval_start_utc
+
+		annotation SummarizationSetBy = Automatic
+
+	column interval_end_utc
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 31ddeb6f-16b8-40ac-b942-a81db520ee7f
+		summarizeBy: none
+		sourceColumn: interval_end_utc
+
+		annotation SummarizationSetBy = Automatic
+
+	column actual_interval_seconds
+		dataType: double
+		lineageTag: 360383f7-83ee-4dc2-a40a-fb4aad8d5a45
+		summarizeBy: sum
+		sourceColumn: actual_interval_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column source_timezone
+		dataType: string
+		lineageTag: 1fe949b6-6c41-416d-ad9e-38a7976616ea
+		summarizeBy: none
+		sourceColumn: source_timezone
+
+		annotation SummarizationSetBy = Automatic
+
+	column interval_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 8dfb88de-d9a7-457d-ac76-fd11f32bd15b
+		summarizeBy: sum
+		sourceColumn: interval_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		lineageTag: e4f60b36-4e4c-4142-bbe2-4803616717d2
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column direction
+		dataType: string
+		lineageTag: eae35287-3a54-48a3-a85c-d67f023d7d3f
+		summarizeBy: none
+		sourceColumn: direction
+
+		annotation SummarizationSetBy = Automatic
+
+	column raw_record_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 55851cab-6aaf-4528-9c41-1cad1b220e80
+		summarizeBy: sum
+		sourceColumn: raw_record_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column excluded_record_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 223b670d-bd16-4727-bc13-6a2bce081036
+		summarizeBy: sum
+		sourceColumn: excluded_record_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarantine_record_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 073ffaf4-4d62-47f4-9628-7cec5f075316
+		summarizeBy: sum
+		sourceColumn: quarantine_record_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_source_records
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: bc6c57e0-61d8-496c-9ad0-470e52755675
+		summarizeBy: none
+		sourceColumn: has_source_records
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_calls
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 843033d3-30fd-49d7-a9d0-e20bde203586
+		summarizeBy: none
+		sourceColumn: has_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_file_available
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: cbe1a1a2-ff5f-418c-9a8c-63d87135b04d
+		summarizeBy: none
+		sourceColumn: source_file_available
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_date_covered
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b41f9ee1-904c-4755-b2d2-14c1c30daa51
+		summarizeBy: none
+		sourceColumn: source_date_covered
+
+		annotation SummarizationSetBy = Automatic
+
+	column interval_coverage_verified
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 84795ee2-a1c7-43f0-b2e5-f4a81cecedef
+		summarizeBy: none
+		sourceColumn: interval_coverage_verified
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_period_covered
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 4665d3f3-f99a-43b7-b606-5fe21e05f085
+		summarizeBy: none
+		sourceColumn: source_period_covered
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_operating_interval
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: dee7aa6f-c04b-4870-a150-74c9518f69ef
+		summarizeBy: none
+		sourceColumn: is_operating_interval
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_closed_interval
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0af8fc4e-47bc-4683-a9c4-b7b3f98754a7
+		summarizeBy: none
+		sourceColumn: is_closed_interval
+
+		annotation SummarizationSetBy = Automatic
+
+	column coverage_status
+		dataType: string
+		lineageTag: 81ee8b2d-a6cb-4b36-b7a7-e004bb0586ec
+		summarizeBy: none
+		sourceColumn: coverage_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column zero_fill_reason
+		dataType: string
+		lineageTag: e17e7d78-43ba-497b-811a-1c1e86ebc80f
+		summarizeBy: none
+		sourceColumn: zero_fill_reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column dst_transition_flag
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 23cfb7b7-6479-4f43-86b9-8853152ce502
+		summarizeBy: none
+		sourceColumn: dst_transition_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column dst_status
+		dataType: string
+		lineageTag: 8de51a47-1ab0-438a-a56a-81fff9d1ad8a
+		summarizeBy: none
+		sourceColumn: dst_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column offered_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 74f274fd-8383-4b4b-9ef2-b5da2b4d81e4
+		summarizeBy: sum
+		sourceColumn: offered_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column agent_demand_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: b3ba6387-ecdb-4b65-811c-bc3eba55d615
+		summarizeBy: sum
+		sourceColumn: agent_demand_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column answered_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c35cdc4-6d87-45b8-b4a3-6db180bbc28f
+		summarizeBy: sum
+		sourceColumn: answered_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column abandoned_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 7fcbea6b-9361-4a68-922f-208cda8d5def
+		summarizeBy: sum
+		sourceColumn: abandoned_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column queue_abandoned_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 566cc698-e5c4-4b6a-9893-1e83d280f595
+		summarizeBy: sum
+		sourceColumn: queue_abandoned_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column vru_abandoned_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 44e5a675-3e83-499c-ad52-0613fee66d8f
+		summarizeBy: sum
+		sourceColumn: vru_abandoned_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column short_abandon_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a69f41b-c69c-4395-9316-f3df980ba6c3
+		summarizeBy: sum
+		sourceColumn: short_abandon_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column answered_within_20s
+		dataType: int64
+		formatString: 0
+		lineageTag: ea4642d2-427e-43ef-a3ac-4ea9848ba903
+		summarizeBy: sum
+		sourceColumn: answered_within_20s
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_level_denominator
+		dataType: int64
+		formatString: 0
+		lineageTag: 39d2334a-d300-40c9-80b3-9b89da1adab8
+		summarizeBy: sum
+		sourceColumn: service_level_denominator
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_level_rate
+		dataType: double
+		lineageTag: 42def246-75b9-43b4-96f2-4fbb8fdb889e
+		summarizeBy: sum
+		sourceColumn: service_level_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_wait_seconds
+		dataType: int64
+		formatString: 0
+		lineageTag: 5d26521b-f562-4434-aeb7-faec8a091381
+		summarizeBy: sum
+		sourceColumn: total_wait_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_wait_seconds
+		dataType: double
+		lineageTag: bccfe2d9-b2e8-4d71-b368-e38b52fa5dcc
+		summarizeBy: sum
+		sourceColumn: avg_wait_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column aht_eligible_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 88a87b98-7a96-4f9b-b581-db440f62140f
+		summarizeBy: sum
+		sourceColumn: aht_eligible_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_service_seconds_for_aht
+		dataType: int64
+		formatString: 0
+		lineageTag: 53a530f1-165d-4708-aef6-e98d308bf3e6
+		summarizeBy: sum
+		sourceColumn: total_service_seconds_for_aht
+
+		annotation SummarizationSetBy = Automatic
+
+	column aht_proxy_seconds
+		dataType: double
+		lineageTag: 4bad5db3-7cf4-41ed-b3e4-a8c0d9b9b751
+		summarizeBy: sum
+		sourceColumn: aht_proxy_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column data_origin
+		dataType: string
+		lineageTag: bc67af44-8f99-4ede-9aac-c820f86b3ecb
+		summarizeBy: none
+		sourceColumn: data_origin
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_reference
+		dataType: string
+		isHidden
+		lineageTag: f754bacc-45ba-4d64-9dd4-8b4ca367f169
+		summarizeBy: none
+		sourceColumn: source_reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column generation_method
+		dataType: string
+		isHidden
+		lineageTag: dec6335a-524c-4acd-94dc-7dd8c5565350
+		summarizeBy: none
+		sourceColumn: generation_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column generation_version
+		dataType: string
+		isHidden
+		lineageTag: f4b67136-4b38-4429-9a6b-41783bd2b999
+		summarizeBy: none
+		sourceColumn: generation_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column etl_run_id
+		dataType: string
+		isHidden
+		lineageTag: fa57f71e-a63c-493f-ad24-2ce32ecfe93e
+		summarizeBy: none
+		sourceColumn: etl_run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics fact_queue_interval_complete' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "call_center_wfm"),
+				    analytics_fact_queue_interval_complete = Source{[Schema="analytics",Item="fact_queue_interval_complete"]}[Data]
+				in
+				    analytics_fact_queue_interval_complete
+
+	annotation PBI_ResultType = Table
+

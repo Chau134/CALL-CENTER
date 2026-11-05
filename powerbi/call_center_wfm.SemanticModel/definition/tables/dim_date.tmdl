@@ -1,0 +1,259 @@
+table dim_date
+	lineageTag: 8e32c4dd-d626-4d7c-9b72-e80449dfddb7
+	dataCategory: Time
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8bd6b009-5af2-46b4-abac-72faf34a1979
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column calendar_date
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: 271152ff-66ed-4052-987e-cbb698d6287e
+		summarizeBy: none
+		sourceColumn: calendar_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column day_of_week_iso
+		dataType: int64
+		formatString: 0
+		lineageTag: adc7b6e6-b37c-44c3-a637-1bd18e1f9588
+		summarizeBy: sum
+		sourceColumn: day_of_week_iso
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_name
+		dataType: string
+		lineageTag: 72776fcd-b0e2-443a-957d-f99982ba5f3f
+		summarizeBy: none
+		sourceColumn: day_name
+		sortByColumn: day_of_week_iso
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_month
+		dataType: int64
+		formatString: 0
+		lineageTag: 40d9953c-b75c-4f24-9b2a-76d45a5dc83d
+		summarizeBy: sum
+		sourceColumn: day_of_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_year
+		dataType: int64
+		formatString: 0
+		lineageTag: 11059c38-75eb-4761-96e7-c9d4c1f31a62
+		summarizeBy: sum
+		sourceColumn: day_of_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column week_of_year
+		dataType: int64
+		formatString: 0
+		lineageTag: f317b9b0-eeee-4329-980f-63083cc8e09b
+		summarizeBy: sum
+		sourceColumn: week_of_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column week_start_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 36929cb8-4721-4f6d-9b6a-f2dd602661b8
+		summarizeBy: none
+		sourceColumn: week_start_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column month_number
+		dataType: int64
+		formatString: 0
+		lineageTag: d24e4c46-130f-4c46-93dd-56e0c872f6cc
+		summarizeBy: sum
+		sourceColumn: month_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name
+		dataType: string
+		lineageTag: b2c22a16-45b2-4282-8cc5-3126c10936c5
+		summarizeBy: none
+		sourceColumn: month_name
+		sortByColumn: month_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarter_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 1586eeb0-41cc-4cf9-a77f-626dc64930ec
+		summarizeBy: sum
+		sourceColumn: quarter_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 4747712e-263d-4aff-a181-0d9f33cf7ecb
+		summarizeBy: sum
+		sourceColumn: year_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_weekend
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 556f39b5-8346-4a3b-8270-826083c3d6c0
+		summarizeBy: none
+		sourceColumn: is_weekend
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_operating_day
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5fcc1c08-d15e-4d05-a60f-587983b4d635
+		summarizeBy: none
+		sourceColumn: is_operating_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_holiday
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d450508d-ac02-4f42-b408-b35a24381cb8
+		summarizeBy: none
+		sourceColumn: is_holiday
+
+		annotation SummarizationSetBy = Automatic
+
+	column holiday_name
+		dataType: string
+		lineageTag: e3640993-9c63-402a-ac1e-8f4317c65c20
+		summarizeBy: none
+		sourceColumn: holiday_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column holiday_type
+		dataType: string
+		lineageTag: c2864e28-7756-46dd-acc8-bdb4e4dc8173
+		summarizeBy: none
+		sourceColumn: holiday_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_major_holiday
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 4a276228-85da-446e-ab25-d942c7bf3042
+		summarizeBy: none
+		sourceColumn: is_major_holiday
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_calendar_day_before_holiday
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ab2137c0-920e-4cdd-9100-79ae0312ec42
+		summarizeBy: none
+		sourceColumn: is_calendar_day_before_holiday
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_calendar_day_after_holiday
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: fdd929e3-6660-4112-9273-0b6c722509f9
+		summarizeBy: none
+		sourceColumn: is_calendar_day_after_holiday
+
+		annotation SummarizationSetBy = Automatic
+
+	column holiday_data_origin
+		dataType: string
+		lineageTag: 7dfdebf2-c233-4543-9918-41577e267ccf
+		summarizeBy: none
+		sourceColumn: holiday_data_origin
+
+		annotation SummarizationSetBy = Automatic
+
+	column holiday_source_reference
+		dataType: string
+		lineageTag: 9e745e14-9a2c-4d77-8152-977f22e46cfa
+		summarizeBy: none
+		sourceColumn: holiday_source_reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_dst_transition_day
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 37ded292-b99d-4644-8a8e-0c3f1cc6b849
+		summarizeBy: none
+		sourceColumn: is_dst_transition_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_origin
+		dataType: string
+		lineageTag: 83c3b218-4345-42db-a78b-83797f85b0cd
+		summarizeBy: none
+		sourceColumn: data_origin
+
+		annotation SummarizationSetBy = Automatic
+
+	column generation_method
+		dataType: string
+		isHidden
+		lineageTag: 79513253-2a66-4328-8438-ae21a4914c0f
+		summarizeBy: none
+		sourceColumn: generation_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column generation_version
+		dataType: string
+		isHidden
+		lineageTag: d2f0caa4-b18a-4952-997a-a4d8c799e664
+		summarizeBy: none
+		sourceColumn: generation_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column etl_run_id
+		dataType: string
+		isHidden
+		lineageTag: 9191fbff-cd73-4300-9e91-9fa281e77a4f
+		summarizeBy: none
+		sourceColumn: etl_run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_date' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "call_center_wfm"),
+				    analytics_dim_date = Source{[Schema="analytics",Item="dim_date"]}[Data]
+				in
+				    analytics_dim_date
+
+	annotation PBI_ResultType = Table
+

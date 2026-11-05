@@ -1,0 +1,344 @@
+/// Central measure table for Call Center WFM analytics.
+table _Measures
+	lineageTag: 038ebb33-a61e-4895-81ae-93fa5de6f8f8
+
+	/// All clean inbound calls entering the VRU.
+	measure 'Offered Calls' = SUM('fact_queue_interval_complete'[offered_calls])
+		formatString: #,0
+		displayFolder: 01 Queue KPIs
+		lineageTag: 5a7970de-c88a-4a53-bfd6-0a3d0a452c5c
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Answered plus queue-abandoned calls; staffing forecast target.
+	measure 'Agent Demand Calls' = SUM('fact_queue_interval_complete'[agent_demand_calls])
+		formatString: #,0
+		displayFolder: 01 Queue KPIs
+		lineageTag: df1f50b3-8ab6-4c96-b78b-0dae4a7e55be
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Answered calls.
+	measure 'Answered Calls' = SUM('fact_queue_interval_complete'[answered_calls])
+		formatString: #,0
+		displayFolder: 01 Queue KPIs
+		lineageTag: ad346d03-8858-489e-9edb-44a6b0d51df2
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// All abandoned calls, including short abandons.
+	measure 'Abandoned Calls' = SUM('fact_queue_interval_complete'[abandoned_calls])
+		formatString: #,0
+		displayFolder: 01 Queue KPIs
+		lineageTag: 635071fd-6f9c-41c6-94b4-209d91407914
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Abandoned calls that reached the agent queue.
+	measure 'Queue Abandoned Calls' = SUM('fact_queue_interval_complete'[queue_abandoned_calls])
+		formatString: #,0
+		displayFolder: 01 Queue KPIs
+		lineageTag: 7da570b0-3713-4b59-a908-4c0a758a54c3
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Abandoned calls that did not reach the queue.
+	measure 'VRU Abandoned Calls' = SUM('fact_queue_interval_complete'[vru_abandoned_calls])
+		formatString: #,0
+		displayFolder: 01 Queue KPIs
+		lineageTag: 1e74a87d-ca6f-4532-9dcb-3806245bbd44
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Abandoned calls with wait time at most five seconds.
+	measure 'Short Abandoned Calls' = SUM('fact_queue_interval_complete'[short_abandon_calls])
+		formatString: #,0
+		displayFolder: 01 Queue KPIs
+		lineageTag: 3d1a77a0-2b8e-4e06-a633-8fbe321b64a3
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Answered calls divided by offered calls.
+	measure 'Answer Rate' = DIVIDE([Answered Calls], [Offered Calls])
+		formatString: 0.00%
+		displayFolder: 01 Queue KPIs
+		lineageTag: 587943d5-b1a1-4180-87ac-48112ba30b94
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Abandoned calls divided by offered calls.
+	measure 'Abandon Rate' = DIVIDE([Abandoned Calls], [Offered Calls])
+		formatString: 0.00%
+		displayFolder: 01 Queue KPIs
+		lineageTag: c4604acd-ab30-48af-84c0-e2b98cd071bc
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Short abandoned calls divided by offered calls.
+	measure 'Short Abandon Rate' = DIVIDE([Short Abandoned Calls], [Offered Calls])
+		formatString: 0.00%
+		displayFolder: 01 Queue KPIs
+		lineageTag: 9c048e0f-a3d0-4671-a97e-e826852e6646
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Answered within 20 seconds divided by eligible offered calls, excluding short abandons.
+	measure 'Service Level' = DIVIDE(SUM('fact_queue_interval_complete'[answered_within_20s]), SUM('fact_queue_interval_complete'[service_level_denominator]))
+		formatString: 0.00%
+		displayFolder: 01 Queue KPIs
+		lineageTag: f554b7ec-b808-4c1f-9eb4-4698adbbd787
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Service-time proxy; source lacks hold and ACW.
+	measure 'AHT Proxy Seconds' = DIVIDE(SUM('fact_queue_interval_complete'[total_service_seconds_for_aht]), SUM('fact_queue_interval_complete'[aht_eligible_calls]))
+		formatString: #,0.00
+		displayFolder: 01 Queue KPIs
+		lineageTag: 0aea40b5-8c36-4b69-aaa7-b2480c0d4376
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Average wait across all clean calls; not ASA.
+	measure 'Average Wait Seconds All Calls' = DIVIDE(SUM('fact_queue_interval_complete'[total_wait_seconds]), [Offered Calls])
+		formatString: #,0.00
+		displayFolder: 01 Queue KPIs
+		lineageTag: 43d25950-5464-4f05-8e5c-a35f292dcec6
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Model selected by aggregate WAPE, absolute bias, then MAE.
+	measure 'Selected Model Name' =
+			CALCULATE(
+			        SELECTEDVALUE('fact_model_evaluation'[model_name]),
+			        'fact_model_evaluation'[is_selected_model] = TRUE(),
+			        'fact_model_evaluation'[backtest_fold] = "ALL",
+			        'fact_model_evaluation'[evaluation_scope] = "overall"
+			    )
+		displayFolder: 02 Forecast
+		lineageTag: e7340691-90a8-41d4-8105-d0149065710b
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Selected-model forecast calls across non-overlapping backtest targets.
+	measure 'Selected Forecast Calls' = CALCULATE(SUM('fact_forecast_interval'[forecast_agent_demand_calls]), 'fact_forecast_interval'[is_selected_model] = TRUE())
+		formatString: #,0.00
+		displayFolder: 02 Forecast
+		lineageTag: 1dc81730-ac3f-40cd-a23c-a4a3b37276cc
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Actual calls paired with selected-model target rows.
+	measure 'Selected Forecast Actual' = CALCULATE(SUM('fact_forecast_interval'[actual_agent_demand_calls]), 'fact_forecast_interval'[is_selected_model] = TRUE())
+		formatString: #,0
+		displayFolder: 02 Forecast
+		lineageTag: ff1e77b9-9c43-4ce8-9a4e-effd08267902
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Total selected-model absolute error.
+	measure 'Selected Forecast Absolute Error' = CALCULATE(SUM('fact_forecast_interval'[absolute_error]), 'fact_forecast_interval'[is_selected_model] = TRUE())
+		formatString: #,0.00
+		displayFolder: 02 Forecast
+		lineageTag: 6f27b386-788f-4ac8-a97c-b84bd4f84919
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Selected-model WAPE over interval rows in filter context.
+	measure 'Selected Forecast WAPE' = DIVIDE([Selected Forecast Absolute Error], [Selected Forecast Actual])
+		formatString: 0.00%
+		displayFolder: 02 Forecast
+		lineageTag: 254671ad-fc07-4ef6-81e3-13825c677320
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Forecast minus actual divided by actual; negative means under-forecast.
+	measure 'Selected Forecast Bias' = DIVIDE([Selected Forecast Calls] - [Selected Forecast Actual], [Selected Forecast Actual])
+		formatString: 0.00%
+		displayFolder: 02 Forecast
+		lineageTag: 6ea3b5cb-f83d-4e99-a2bd-32ab31fa03da
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Selected-model mean absolute error.
+	measure 'Selected Forecast MAE' = CALCULATE(AVERAGE('fact_forecast_interval'[absolute_error]), 'fact_forecast_interval'[is_selected_model] = TRUE())
+		formatString: #,0.00
+		displayFolder: 02 Forecast
+		lineageTag: 41cd84f7-3d6a-4527-b16c-cc344785a39f
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Selected-model root mean squared error.
+	measure 'Selected Forecast RMSE' =
+			VAR MeanSquaredError =
+			        CALCULATE(
+			            AVERAGE('fact_forecast_interval'[squared_error]),
+			            'fact_forecast_interval'[is_selected_model] = TRUE()
+			        )
+			    RETURN SQRT(MeanSquaredError)
+		formatString: #,0.00
+		displayFolder: 02 Forecast
+		lineageTag: 575b907f-5a96-4b7d-adea-81184087547a
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Aggregate overall WAPE scalar for each model.
+	measure 'Model WAPE (All Folds)' = CALCULATE(MAX('fact_model_evaluation'[wape]), 'fact_model_evaluation'[backtest_fold] = "ALL", 'fact_model_evaluation'[evaluation_scope] = "overall")
+		formatString: 0.00%
+		displayFolder: 02 Forecast\Model Comparison
+		lineageTag: 42a09177-303b-425f-b0ea-a2894be40ba2
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Aggregate overall bias scalar for each model.
+	measure 'Model Bias (All Folds)' = CALCULATE(MAX('fact_model_evaluation'[bias]), 'fact_model_evaluation'[backtest_fold] = "ALL", 'fact_model_evaluation'[evaluation_scope] = "overall")
+		formatString: 0.00%
+		displayFolder: 02 Forecast\Model Comparison
+		lineageTag: ab39c758-2a45-4433-b80b-99217f2a5008
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Aggregate overall MAE scalar for each model.
+	measure 'Model MAE (All Folds)' = CALCULATE(MAX('fact_model_evaluation'[mae]), 'fact_model_evaluation'[backtest_fold] = "ALL", 'fact_model_evaluation'[evaluation_scope] = "overall")
+		formatString: #,0.00
+		displayFolder: 02 Forecast\Model Comparison
+		lineageTag: 7ec8fd10-ae31-4012-81db-ef1140f5dbce
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Aggregate overall RMSE scalar for each model.
+	measure 'Model RMSE (All Folds)' = CALCULATE(MAX('fact_model_evaluation'[rmse]), 'fact_model_evaluation'[backtest_fold] = "ALL", 'fact_model_evaluation'[evaluation_scope] = "overall")
+		formatString: #,0.00
+		displayFolder: 02 Forecast\Model Comparison
+		lineageTag: d180cbf5-37ee-4961-8bcb-5487d4fd2350
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Forecast-driven workload hours.
+	measure 'Planned Workload Hours' = SUM('fact_staffing_requirement'[workload_hours])
+		formatString: #,0.00
+		displayFolder: 03 Staffing
+		lineageTag: 3fa681d0-cd4d-42e4-95ac-65791bdb37d6
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Retrospective actualized workload; not planning information.
+	measure 'Actualized Workload Hours' = SUM('fact_staffing_requirement'[actualized_workload_hours])
+		formatString: #,0.00
+		displayFolder: 03 Staffing
+		lineageTag: a2774495-9344-4658-87b6-980bfd5494ce
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Peak productive requirement for the current one-queue selected-run MVP.
+	measure 'Peak Productive Agents' = MAX('fact_staffing_requirement'[required_productive_agents])
+		formatString: #,0
+		displayFolder: 03 Staffing
+		lineageTag: b0c54485-9cc5-44d9-bd55-e52ac21f38a2
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Peak scheduled requirement after shrinkage for current MVP.
+	measure 'Peak Scheduled Agents' = MAX('fact_staffing_requirement'[required_scheduled_agents])
+		formatString: #,0
+		displayFolder: 03 Staffing
+		lineageTag: 2a394e03-ae6d-4da2-9d0f-7762ce782fbf
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Sum of productive requirement times interval hours.
+	measure 'Required Productive Agent Hours' = SUMX('fact_staffing_requirement', 'fact_staffing_requirement'[required_productive_agents] * 'fact_staffing_requirement'[interval_minutes] / 60)
+		formatString: #,0.00
+		displayFolder: 03 Staffing
+		lineageTag: 311a7f4d-038a-4b94-9c2f-565a764985ba
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Sum of scheduled requirement times interval hours.
+	measure 'Required Scheduled Agent Hours' = SUMX('fact_staffing_requirement', 'fact_staffing_requirement'[required_scheduled_agents] * 'fact_staffing_requirement'[interval_minutes] / 60)
+		formatString: #,0.00
+		displayFolder: 03 Staffing
+		lineageTag: becfbe4e-64c5-41d9-bfc2-444d5f97b8cc
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Count of unique staffing rows with scheduled requirement above zero in current MVP grain.
+	measure 'Intervals Requiring Staff' = CALCULATE(COUNTROWS('fact_staffing_requirement'), 'fact_staffing_requirement'[required_scheduled_agents] > 0)
+		formatString: #,0
+		displayFolder: 03 Staffing
+		lineageTag: 171e9cfe-30e5-4d15-935c-dfe94810748d
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Offered calls in service-type fact.
+	measure 'Service Offered Calls' = SUM('fact_service_type_interval'[offered_calls])
+		formatString: #,0
+		displayFolder: 04 Service Type
+		lineageTag: 9bebb2a3-b0ec-4be8-a0c7-98955da83bc7
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Agent demand calls in service-type fact.
+	measure 'Service Agent Demand Calls' = SUM('fact_service_type_interval'[agent_demand_calls])
+		formatString: #,0
+		displayFolder: 04 Service Type
+		lineageTag: 2ec8e883-1a1e-484d-866d-58d0793d8fd1
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Answered calls in service-type fact.
+	measure 'Service Answered Calls' = SUM('fact_service_type_interval'[answered_calls])
+		formatString: #,0
+		displayFolder: 04 Service Type
+		lineageTag: c4a47be4-395a-402b-950c-92580599b80a
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Abandoned calls in service-type fact.
+	measure 'Service Abandoned Calls' = SUM('fact_service_type_interval'[abandoned_calls])
+		formatString: #,0
+		displayFolder: 04 Service Type
+		lineageTag: a7ca74a7-d371-47e8-b459-705269dbc719
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Service-type answered divided by service-type offered.
+	measure 'Service Answer Rate' = DIVIDE([Service Answered Calls], [Service Offered Calls])
+		formatString: 0.00%
+		displayFolder: 04 Service Type
+		lineageTag: ee7a8653-6c63-499c-ba37-e84abbb48837
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Service-type abandoned divided by service-type offered.
+	measure 'Service Abandon Rate' = DIVIDE([Service Abandoned Calls], [Service Offered Calls])
+		formatString: 0.00%
+		displayFolder: 04 Service Type
+		lineageTag: 248c1578-054f-41f1-b2de-8eaa7edfdf51
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Weighted service-time proxy by service type.
+	measure 'Service AHT Proxy Seconds' = DIVIDE(SUM('fact_service_type_interval'[service_seconds_sum_for_aht]), SUM('fact_service_type_interval'[valid_for_aht_calls]))
+		formatString: #,0.00
+		displayFolder: 04 Service Type
+		lineageTag: 78804020-925d-485d-9ab5-1b3ecf2e5094
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	/// Latest successful PostgreSQL mart load timestamp.
+	measure 'Last Warehouse Load' = MAX('vw_powerbi_refresh_status'[loaded_at_utc])
+		formatString: yyyy-mm-dd hh:mm
+		displayFolder: 05 Data Quality
+		lineageTag: 0b6727bd-8dcb-436a-8376-b2ce25dafcc7
+
+		annotation CALL_CENTER_WFM_AUTOGEN = 1
+
+	column Value
+		lineageTag: 0fa25e04-0609-4959-9a59-22b428ac0167
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition _Measures = calculated
+		mode: import
+		source = {0}
+

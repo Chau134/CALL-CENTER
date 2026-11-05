@@ -1,0 +1,288 @@
+table fact_forecast_interval
+	lineageTag: 23f501d0-d758-45b0-ae6d-3bda77b669cd
+
+	column forecast_run_id
+		dataType: string
+		lineageTag: 1b4eb2d4-ceee-4fd7-b786-13a7b664dc8b
+		summarizeBy: none
+		sourceColumn: forecast_run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column forecast_generated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e8b793b5-f202-4047-b09a-2046768a8c74
+		summarizeBy: none
+		sourceColumn: forecast_generated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column artifact_generated_at_utc
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 65608b2f-e8e6-47eb-bfbe-170a45e3d8af
+		summarizeBy: none
+		sourceColumn: artifact_generated_at_utc
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_local_interval_start
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4513d442-ee4b-4fc4-b360-31be7afe1cac
+		summarizeBy: none
+		sourceColumn: target_local_interval_start
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e6495d7f-0ada-4077-b9e0-6b11115a4cfd
+		summarizeBy: none
+		sourceColumn: target_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_interval_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 78e3f742-00d2-4feb-ad3b-71a314542eed
+		summarizeBy: none
+		sourceColumn: target_interval_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column queue_id
+		dataType: string
+		lineageTag: 761fa14c-e4e9-4bae-a8b6-03ef0df68669
+		summarizeBy: none
+		sourceColumn: queue_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_metric
+		dataType: string
+		lineageTag: 36f0841c-991f-420c-97df-6d66641bab49
+		summarizeBy: none
+		sourceColumn: target_metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column model_name
+		dataType: string
+		lineageTag: c2350558-0169-4d7d-bab0-d366d635adc6
+		summarizeBy: none
+		sourceColumn: model_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column model_version
+		dataType: string
+		lineageTag: efa22f09-0b19-4c2a-8ee4-54097adc5a34
+		summarizeBy: none
+		sourceColumn: model_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column training_start_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3223c410-5dd5-434b-a9ba-90c59578545b
+		summarizeBy: none
+		sourceColumn: training_start_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column training_end_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 13c90880-cf6f-469b-82e5-1df0d83669fe
+		summarizeBy: none
+		sourceColumn: training_end_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column forecast_agent_demand_calls
+		dataType: double
+		lineageTag: 02c60466-02e1-47a6-8cf2-9ca913d48ff5
+		summarizeBy: sum
+		sourceColumn: forecast_agent_demand_calls
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column actual_agent_demand_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 889d6289-b46b-4f82-a0da-2bbf97485a64
+		summarizeBy: sum
+		sourceColumn: actual_agent_demand_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column forecast_aht_proxy_seconds
+		dataType: double
+		lineageTag: 05fec1b3-a2ee-41c7-9982-dc474e9e001c
+		summarizeBy: sum
+		sourceColumn: forecast_aht_proxy_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column actual_aht_proxy_seconds
+		dataType: double
+		lineageTag: 95a26020-1cb4-4b3a-aa2d-63e515a20ea1
+		summarizeBy: sum
+		sourceColumn: actual_aht_proxy_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column error_actual_minus_forecast
+		dataType: double
+		lineageTag: 2c7c1875-1feb-48f6-8698-46bbf063bddf
+		summarizeBy: sum
+		sourceColumn: error_actual_minus_forecast
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column absolute_error
+		dataType: double
+		lineageTag: 30f98d19-3cfc-4119-b0d4-1da3246cc6fb
+		summarizeBy: sum
+		sourceColumn: absolute_error
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column squared_error
+		dataType: double
+		lineageTag: 95e05d6b-0094-4ca3-ae4d-f7ba74df5a3a
+		summarizeBy: sum
+		sourceColumn: squared_error
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column percentage_error
+		dataType: double
+		lineageTag: fa008c16-05d2-4dfb-bffd-cea080a9c2d9
+		summarizeBy: sum
+		sourceColumn: percentage_error
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column backtest_fold
+		dataType: int64
+		formatString: 0
+		lineageTag: 78f513ac-e42f-4d26-b361-f7ac1920a9dd
+		summarizeBy: sum
+		sourceColumn: backtest_fold
+
+		annotation SummarizationSetBy = Automatic
+
+	column forecast_horizon_intervals
+		dataType: int64
+		formatString: 0
+		lineageTag: f945afaf-b267-42e2-802e-38978e89a4b3
+		summarizeBy: sum
+		sourceColumn: forecast_horizon_intervals
+
+		annotation SummarizationSetBy = Automatic
+
+	column forecast_type
+		dataType: string
+		lineageTag: 695a50d8-5ab8-47a1-b602-8464ee27a327
+		summarizeBy: none
+		sourceColumn: forecast_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column forecast_quantile
+		dataType: double
+		lineageTag: 1ed2cf7a-313b-4fb6-b0fe-72f3dcb08032
+		summarizeBy: sum
+		sourceColumn: forecast_quantile
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column evaluation_status
+		dataType: string
+		lineageTag: adfd71fc-4fba-40e9-bae1-70dd210a1941
+		summarizeBy: none
+		sourceColumn: evaluation_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_selected_model
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 98934645-4db8-490b-94aa-dda40fb2b15d
+		summarizeBy: none
+		sourceColumn: is_selected_model
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_operating_interval
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 365c5b18-37a5-4782-88b6-7678fadfa07f
+		summarizeBy: none
+		sourceColumn: is_operating_interval
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_origin
+		dataType: string
+		lineageTag: ba8d28f1-e2bd-4864-a4fe-952b95aeeae4
+		summarizeBy: none
+		sourceColumn: data_origin
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_fact
+		dataType: string
+		isHidden
+		lineageTag: cabd9d14-070d-4ffa-bf37-30ad8df070a0
+		summarizeBy: none
+		sourceColumn: source_fact
+
+		annotation SummarizationSetBy = Automatic
+
+	column etl_run_id
+		dataType: string
+		isHidden
+		lineageTag: c897003e-c310-45e6-8428-557614d05110
+		summarizeBy: none
+		sourceColumn: etl_run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics fact_forecast_interval' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "call_center_wfm"),
+				    analytics_fact_forecast_interval = Source{[Schema="analytics",Item="fact_forecast_interval"]}[Data]
+				in
+				    analytics_fact_forecast_interval
+
+	annotation PBI_ResultType = Table
+

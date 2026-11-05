@@ -1,0 +1,67 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "slicer_fold",
+  "position": {
+    "x": 404,
+    "y": 24,
+    "z": 1001,
+    "height": 82,
+    "width": 350,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_model_evaluation"
+                    }
+                  },
+                  "Property": "backtest_fold"
+                }
+              },
+              "queryRef": "fact_model_evaluation.backtest_fold",
+              "nativeQueryRef": "backtest_fold",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Backtest fold'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "annotations": [
+    {
+      "name": "CALL_CENTER_WFM_AUTOGEN",
+      "value": "1.0.0"
+    }
+  ]
+}

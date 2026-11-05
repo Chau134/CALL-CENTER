@@ -1,0 +1,126 @@
+table dim_time_interval
+	lineageTag: b4cbc220-5c47-4c0f-8ff7-4d9673a7c0da
+
+	column interval_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c5097c3a-153d-480e-abd2-17f71f2df4c5
+		summarizeBy: none
+		sourceColumn: interval_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column interval_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e87806b-a28d-4656-8419-34446065f9ec
+		summarizeBy: sum
+		sourceColumn: interval_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_time
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 9e63140b-7623-4eaa-b9ac-99e22eb863e7
+		summarizeBy: none
+		sourceColumn: start_time
+		sortByColumn: interval_number
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column end_time
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 882233f3-76da-4124-8b3b-a5b816c95290
+		summarizeBy: none
+		sourceColumn: end_time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column interval_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: cff6b66b-fb7f-4975-81b9-0580192063b6
+		summarizeBy: sum
+		sourceColumn: interval_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column hour_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 9ca4f4aa-22fc-4287-b6c0-0c581d0419e8
+		summarizeBy: sum
+		sourceColumn: hour_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column minute_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 08208c8e-690d-4e10-9570-ec8aa0a6808f
+		summarizeBy: sum
+		sourceColumn: minute_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column daypart
+		dataType: string
+		lineageTag: cfcbed3f-9c8f-4f18-a40e-3fc02173e7b5
+		summarizeBy: none
+		sourceColumn: daypart
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_origin
+		dataType: string
+		lineageTag: fb507be7-525f-4cdf-b797-796510d976f0
+		summarizeBy: none
+		sourceColumn: data_origin
+
+		annotation SummarizationSetBy = Automatic
+
+	column generation_method
+		dataType: string
+		isHidden
+		lineageTag: b70441e1-dea5-4edc-a03b-6f6756c5da6a
+		summarizeBy: none
+		sourceColumn: generation_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column generation_version
+		dataType: string
+		isHidden
+		lineageTag: f1e66cf8-093f-4ff5-ab5d-63f1e891057e
+		summarizeBy: none
+		sourceColumn: generation_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column etl_run_id
+		dataType: string
+		isHidden
+		lineageTag: 7c817016-ae75-4189-8821-e694ab4375b0
+		summarizeBy: none
+		sourceColumn: etl_run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_time_interval' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "call_center_wfm"),
+				    analytics_dim_time_interval = Source{[Schema="analytics",Item="dim_time_interval"]}[Data]
+				in
+				    analytics_dim_time_interval
+
+	annotation PBI_ResultType = Table
+

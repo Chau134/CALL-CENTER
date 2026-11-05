@@ -1,0 +1,120 @@
+table dim_queue
+	lineageTag: 64f7729e-ed85-4197-8d99-1e3ea1fd1967
+
+	column queue_id
+		dataType: string
+		lineageTag: 1a9ef01e-3bc4-469b-9196-6c6d12df44f2
+		summarizeBy: none
+		sourceColumn: queue_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column queue_name
+		dataType: string
+		lineageTag: ca4a258a-c475-4168-8bdf-03485e825a6c
+		summarizeBy: none
+		sourceColumn: queue_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		lineageTag: 20d8cca6-5adc-4804-be2a-bac960e13cd0
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column direction
+		dataType: string
+		lineageTag: ad56c757-a625-40b2-a934-11cd21eed737
+		summarizeBy: none
+		sourceColumn: direction
+
+		annotation SummarizationSetBy = Automatic
+
+	column timezone
+		dataType: string
+		lineageTag: bbf350b9-b98e-47b7-8372-33c334d73291
+		summarizeBy: none
+		sourceColumn: timezone
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5bf40be4-7e98-4ad5-80c1-df1ea2f29957
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_from
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ab6c7f24-8c25-42ce-b843-edd2380dc79c
+		summarizeBy: none
+		sourceColumn: valid_from
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column valid_to
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4a0143cd-e30d-4c7f-809a-24b55c158db4
+		summarizeBy: none
+		sourceColumn: valid_to
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column data_origin
+		dataType: string
+		lineageTag: 9b314a69-de66-4130-8e8b-152b16490513
+		summarizeBy: none
+		sourceColumn: data_origin
+
+		annotation SummarizationSetBy = Automatic
+
+	column generation_method
+		dataType: string
+		isHidden
+		lineageTag: 4e11cd8c-beb7-4c63-995a-632e757eabb4
+		summarizeBy: none
+		sourceColumn: generation_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column generation_version
+		dataType: string
+		isHidden
+		lineageTag: a7ff273d-0fda-41cb-9b21-eb1306698875
+		summarizeBy: none
+		sourceColumn: generation_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column etl_run_id
+		dataType: string
+		isHidden
+		lineageTag: 91808006-b2c6-4198-8053-56b1f220133a
+		summarizeBy: none
+		sourceColumn: etl_run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_queue' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "call_center_wfm"),
+				    analytics_dim_queue = Source{[Schema="analytics",Item="dim_queue"]}[Data]
+				in
+				    analytics_dim_queue
+
+	annotation PBI_ResultType = Table
+

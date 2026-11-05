@@ -1,0 +1,178 @@
+table fact_model_evaluation
+	lineageTag: 26603ce6-e1c6-43f8-837c-6f0bbed3dae1
+
+	column model_name
+		dataType: string
+		lineageTag: fdb4a840-7612-406f-a860-e90b91b3da32
+		summarizeBy: none
+		sourceColumn: model_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column model_version
+		dataType: string
+		lineageTag: 66f392b1-719a-4a93-bbf4-2dc2fb8d8be9
+		summarizeBy: none
+		sourceColumn: model_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column forecast_type
+		dataType: string
+		lineageTag: 9666c7a5-c4b3-4de6-b0c0-4fa2339acb23
+		summarizeBy: none
+		sourceColumn: forecast_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column evaluation_scope
+		dataType: string
+		lineageTag: f284b0e9-74b5-4b46-bcf1-79a59f452570
+		summarizeBy: none
+		sourceColumn: evaluation_scope
+
+		annotation SummarizationSetBy = Automatic
+
+	column backtest_fold
+		dataType: string
+		lineageTag: dbabfd35-335c-425a-b63a-603030f671e9
+		summarizeBy: none
+		sourceColumn: backtest_fold
+
+		annotation SummarizationSetBy = Automatic
+
+	column training_start_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4670927b-b4f4-4cda-807c-91a2ab1f6123
+		summarizeBy: none
+		sourceColumn: training_start_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column training_end_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2609afec-e2f3-4fc8-b377-850b4f1e5bc1
+		summarizeBy: none
+		sourceColumn: training_end_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column test_start
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 97621001-1ab6-435d-ac7d-d9f7037a7254
+		summarizeBy: none
+		sourceColumn: test_start
+
+		annotation SummarizationSetBy = Automatic
+
+	column test_end
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c8ad9793-185b-491a-bba0-cfec19a418f5
+		summarizeBy: none
+		sourceColumn: test_end
+
+		annotation SummarizationSetBy = Automatic
+
+	column evaluated_intervals
+		dataType: int64
+		formatString: 0
+		lineageTag: b6786bfd-e738-4c39-8bec-1ab281d186e4
+		summarizeBy: sum
+		sourceColumn: evaluated_intervals
+
+		annotation SummarizationSetBy = Automatic
+
+	column actual_sum
+		dataType: double
+		lineageTag: c88fa897-bd37-4cad-874b-0ee7bd9ea0b1
+		summarizeBy: sum
+		sourceColumn: actual_sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column forecast_sum
+		dataType: double
+		lineageTag: d6e4b2c3-973a-4d74-9fa3-02347427dd2f
+		summarizeBy: sum
+		sourceColumn: forecast_sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column mae
+		dataType: double
+		lineageTag: 512e20a3-678d-4fbf-a758-0565ee7d5dec
+		summarizeBy: sum
+		sourceColumn: mae
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column rmse
+		dataType: double
+		lineageTag: abe9bcf7-7e4a-4279-88b9-c2ef0f9f8bcb
+		summarizeBy: sum
+		sourceColumn: rmse
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column wape
+		dataType: double
+		lineageTag: 96c83c7a-d463-4248-b55a-f669e0c7a5ff
+		summarizeBy: sum
+		sourceColumn: wape
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column bias
+		dataType: double
+		lineageTag: fd0d259f-abd9-4b46-9597-ce9e65bd7551
+		summarizeBy: sum
+		sourceColumn: bias
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column is_selected_model
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f3e52740-73c5-4264-8ece-c58acad3cf7b
+		summarizeBy: none
+		sourceColumn: is_selected_model
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_origin
+		dataType: string
+		lineageTag: 51776bfa-d4e0-4dc5-8bc0-f98e5fa33139
+		summarizeBy: none
+		sourceColumn: data_origin
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics fact_model_evaluation' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "call_center_wfm"),
+				    analytics_fact_model_evaluation = Source{[Schema="analytics",Item="fact_model_evaluation"]}[Data]
+				in
+				    analytics_fact_model_evaluation
+
+	annotation PBI_ResultType = Table
+

@@ -426,7 +426,7 @@ Các query portfolio bắt buộc:
 
 ### Bước 13 — Thiết kế Power BI model
 
-**Trạng thái: assets và readiness QA đã hoàn thành; PBIX chưa dựng.** Star-schema relationships, DAX measure library, theme JSON và SQL/Python readiness checks đã được chuẩn bị. PostgreSQL grain/uniqueness checks pass; cần thực hiện import, relationships và measure creation trong Power BI Desktop.
+**Trạng thái: hoàn thành.** PBIP hiện có 10 warehouse objects, star-schema với 13 relationships, `_Measures` gồm 40 DAX measures, technical columns đã ẩn và theme đã áp dụng. Toàn bộ 40 measures đã thực thi thành công bằng DAX smoke test; PostgreSQL grain/uniqueness checks pass.
 
 - Import các analytics views, ưu tiên star schema.
 - Tạo một Date table và mark as date table.
@@ -437,7 +437,7 @@ Các query portfolio bắt buộc:
 
 ### Bước 14 — Xây ba trang dashboard
 
-**Trạng thái: đã chốt layout và visual specification; chưa dựng visuals trong PBIX.** Ba trang MVP là Executive Overview, Forecast & Staffing, Service Mix & Data Quality. Agent Performance chờ workforce marts.
+**Trạng thái: baseline dashboard đã dựng trong PBIP.** Ba trang MVP gồm Executive Overview (9 visuals), Forecast & Staffing (10 visuals), Service Mix & Data Quality (10 visuals). Power BI đã nạp, render và lưu thành công cả 29 visuals; Agent Performance tiếp tục chờ workforce marts. Việc còn lại là conditional formatting cho heatmaps, chuẩn hóa slicer dropdown, bổ sung navigation/reset filters/tooltips và hoàn thành visual QA trước khi publish.
 
 **Trang 1 — Executive Overview**
 

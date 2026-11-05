@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "call_center_wfm"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a3971692-6d05-42f2-a84a-3740fec776f1"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "0018c160c18e2ab57782",
+  "displayName": "01 Executive Overview",
+  "displayOption": "FitToPage",
+  "height": 1080,
+  "width": 1920,
+  "annotations": [
+    {
+      "name": "CALL_CENTER_WFM_AUTOGEN",
+      "value": "1.0.0"
+    }
+  ]
+}

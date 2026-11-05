@@ -1,0 +1,245 @@
+table fact_service_type_interval
+	lineageTag: d022ed2a-2568-4c25-a636-aedcbc151ffa
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6b202ee7-522d-463e-8925-cc9695f72ebb
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column interval_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ff318ae1-c803-4e2f-b1ff-9116bef5056d
+		summarizeBy: none
+		sourceColumn: interval_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_type_code
+		dataType: string
+		lineageTag: 40f4103d-d6b5-4334-a8cb-581b0e6207c8
+		summarizeBy: none
+		sourceColumn: service_type_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_type_name
+		dataType: string
+		lineageTag: 8b4f2640-fcea-428a-b571-4f0050f840d5
+		summarizeBy: none
+		sourceColumn: service_type_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column queue_id
+		dataType: string
+		lineageTag: e238410b-0024-4cee-b51b-1dd55c0a5591
+		summarizeBy: none
+		sourceColumn: queue_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column local_interval_start
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a45bbcc2-9e74-444c-837e-454e255778d8
+		summarizeBy: none
+		sourceColumn: local_interval_start
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_timezone
+		dataType: string
+		lineageTag: 248d29ef-0406-4641-a33f-292b557df601
+		summarizeBy: none
+		sourceColumn: source_timezone
+
+		annotation SummarizationSetBy = Automatic
+
+	column coverage_status
+		dataType: string
+		lineageTag: eb248789-52ca-4747-b21f-76f4e0778090
+		summarizeBy: none
+		sourceColumn: coverage_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_operating_interval
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0f05489e-2a13-4664-81b4-b789085070f0
+		summarizeBy: none
+		sourceColumn: is_operating_interval
+
+		annotation SummarizationSetBy = Automatic
+
+	column offered_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a935ed1-3c6d-4d04-bcb1-90f298d72cb8
+		summarizeBy: sum
+		sourceColumn: offered_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column agent_demand_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 836f235a-aeb7-4c21-9490-655547dacb61
+		summarizeBy: sum
+		sourceColumn: agent_demand_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column answered_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 1583112a-c3a2-411f-9d76-0ed98d0277eb
+		summarizeBy: sum
+		sourceColumn: answered_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column abandoned_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 38f03f45-15ef-4c19-8a25-3817990690d3
+		summarizeBy: sum
+		sourceColumn: abandoned_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column queue_abandoned_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: a4b86410-9728-4ef3-9f73-1d767e7a90e7
+		summarizeBy: sum
+		sourceColumn: queue_abandoned_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column vru_abandoned_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 438a38cf-7230-4a42-a31c-02aad93e6e1f
+		summarizeBy: sum
+		sourceColumn: vru_abandoned_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column short_abandon_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 704453de-ae94-4c9a-9bb5-285600381c6d
+		summarizeBy: sum
+		sourceColumn: short_abandon_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column answered_within_20s
+		dataType: int64
+		formatString: 0
+		lineageTag: cc6d33e0-7587-45aa-90f7-4841a34ad723
+		summarizeBy: sum
+		sourceColumn: answered_within_20s
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_for_aht_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: cc172ec3-226b-48e0-a1ab-fe9d82d49c11
+		summarizeBy: sum
+		sourceColumn: valid_for_aht_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column wait_seconds_sum
+		dataType: int64
+		formatString: 0
+		lineageTag: 53a8ee02-8a2a-4ba5-a4e9-7151611a4b43
+		summarizeBy: sum
+		sourceColumn: wait_seconds_sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_seconds_sum_for_aht
+		dataType: int64
+		formatString: 0
+		lineageTag: 25c35bd5-0592-4013-8c65-eb90221c91d4
+		summarizeBy: sum
+		sourceColumn: service_seconds_sum_for_aht
+
+		annotation SummarizationSetBy = Automatic
+
+	column aht_proxy_seconds
+		dataType: double
+		lineageTag: feadfe19-cd53-49c5-9845-580bc57c61f9
+		summarizeBy: sum
+		sourceColumn: aht_proxy_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column data_origin
+		dataType: string
+		lineageTag: f5d7c741-ea29-4f9c-ba88-669da4cc6e52
+		summarizeBy: none
+		sourceColumn: data_origin
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_reference
+		dataType: string
+		isHidden
+		lineageTag: 407d4048-3009-4b25-93c0-422da4bb00c9
+		summarizeBy: none
+		sourceColumn: source_reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column generation_method
+		dataType: string
+		isHidden
+		lineageTag: d3b329fd-fc8b-43c7-8d1d-d7fd3d14ab12
+		summarizeBy: none
+		sourceColumn: generation_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column generation_version
+		dataType: string
+		isHidden
+		lineageTag: 75b5b4a1-8930-490d-8f44-83f54bc400e0
+		summarizeBy: none
+		sourceColumn: generation_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column etl_run_id
+		dataType: string
+		isHidden
+		lineageTag: 1fcaa6b1-4032-47c1-a45d-792cffcafc44
+		summarizeBy: none
+		sourceColumn: etl_run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics fact_service_type_interval' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "call_center_wfm"),
+				    analytics_fact_service_type_interval = Source{[Schema="analytics",Item="fact_service_type_interval"]}[Data]
+				in
+				    analytics_fact_service_type_interval
+
+	annotation PBI_ResultType = Table
+

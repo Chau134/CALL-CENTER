@@ -1,0 +1,113 @@
+table dim_service_type
+	lineageTag: 9b72d32d-c84e-4c21-b6b6-85e863a6ca50
+
+	column service_type_code
+		dataType: string
+		lineageTag: f3b41ff9-7a94-468a-88ff-5d1e56613f94
+		summarizeBy: none
+		sourceColumn: service_type_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_type_name
+		dataType: string
+		lineageTag: 8095401c-0e83-4ca0-bc48-fc2af3414305
+		summarizeBy: none
+		sourceColumn: service_type_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column queue_id
+		dataType: string
+		lineageTag: ee21fbfb-1d5e-4ed7-936a-761ea67b2614
+		summarizeBy: none
+		sourceColumn: queue_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_valid
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3f7e4cbc-f40c-4d14-bbad-a7df93725694
+		summarizeBy: none
+		sourceColumn: is_valid
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_from
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ceb782a6-4d30-487e-a176-d51e6224388b
+		summarizeBy: none
+		sourceColumn: valid_from
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column valid_to
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: eeea2a1a-9bf8-46b2-b6ea-0c15d94b4259
+		summarizeBy: none
+		sourceColumn: valid_to
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column data_origin
+		dataType: string
+		lineageTag: 001e92ca-b083-450e-8bc7-ab1f418aaf68
+		summarizeBy: none
+		sourceColumn: data_origin
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_reference
+		dataType: string
+		isHidden
+		lineageTag: 2560c81b-a13a-4c70-a5b0-d8b3204b3052
+		summarizeBy: none
+		sourceColumn: source_reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column generation_method
+		dataType: string
+		isHidden
+		lineageTag: 5a58f005-ce20-4bd7-b01c-2971700aeb0a
+		summarizeBy: none
+		sourceColumn: generation_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column generation_version
+		dataType: string
+		isHidden
+		lineageTag: f141d6d7-9602-49a7-bc29-4fac685222b2
+		summarizeBy: none
+		sourceColumn: generation_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column etl_run_id
+		dataType: string
+		isHidden
+		lineageTag: a9d15a95-7e5a-4dde-ae1c-c5b24e1f8a0f
+		summarizeBy: none
+		sourceColumn: etl_run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics dim_service_type' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "call_center_wfm"),
+				    analytics_dim_service_type = Source{[Schema="analytics",Item="dim_service_type"]}[Data]
+				in
+				    analytics_dim_service_type
+
+	annotation PBI_ResultType = Table
+

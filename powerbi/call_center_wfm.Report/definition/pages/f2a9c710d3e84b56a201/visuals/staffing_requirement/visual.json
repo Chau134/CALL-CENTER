@@ -1,0 +1,99 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "staffing_requirement",
+  "position": {
+    "x": 30,
+    "y": 674,
+    "z": 1008,
+    "height": 376,
+    "width": 910,
+    "tabOrder": 8
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_staffing_requirement"
+                    }
+                  },
+                  "Property": "target_local_interval_start"
+                }
+              },
+              "queryRef": "fact_staffing_requirement.target_local_interval_start",
+              "nativeQueryRef": "Target interval",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Peak Productive Agents"
+                }
+              },
+              "queryRef": "_Measures.Peak Productive Agents",
+              "nativeQueryRef": "Productive agents"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Peak Scheduled Agents"
+                }
+              },
+              "queryRef": "_Measures.Peak Scheduled Agents",
+              "nativeQueryRef": "Scheduled agents"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Productive vs Scheduled Staffing Requirement'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "annotations": [
+    {
+      "name": "CALL_CENTER_WFM_AUTOGEN",
+      "value": "1.0.0"
+    }
+  ]
+}

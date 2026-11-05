@@ -1,0 +1,122 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "service_kpi_summary",
+  "position": {
+    "x": 30,
+    "y": 126,
+    "z": 1004,
+    "height": 170,
+    "width": 1846,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Service Offered Calls"
+                }
+              },
+              "queryRef": "_Measures.Service Offered Calls",
+              "nativeQueryRef": "Service Offered Calls"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Service Answer Rate"
+                }
+              },
+              "queryRef": "_Measures.Service Answer Rate",
+              "nativeQueryRef": "Service Answer Rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Service Abandon Rate"
+                }
+              },
+              "queryRef": "_Measures.Service Abandon Rate",
+              "nativeQueryRef": "Service Abandon Rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Service AHT Proxy Seconds"
+                }
+              },
+              "queryRef": "_Measures.Service AHT Proxy Seconds",
+              "nativeQueryRef": "Service AHT Proxy (seconds)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Last Warehouse Load"
+                }
+              },
+              "queryRef": "_Measures.Last Warehouse Load",
+              "nativeQueryRef": "Last Warehouse Load"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Service Mix KPI Summary'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "annotations": [
+    {
+      "name": "CALL_CENTER_WFM_AUTOGEN",
+      "value": "1.0.0"
+    }
+  ]
+}

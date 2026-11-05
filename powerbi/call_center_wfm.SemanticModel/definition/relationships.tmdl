@@ -1,0 +1,74 @@
+relationship d764813d-9765-4694-88a5-1f1e47224bd6
+	fromColumn: fact_queue_interval_complete.date_key
+	toColumn: dim_date.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 09146b75-da1c-43ae-8932-91e9ca252e80
+	fromColumn: fact_queue_interval_complete.interval_key
+	toColumn: dim_time_interval.interval_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship b0c8f079-20ec-4096-a76f-5453b1a0cb3c
+	fromColumn: fact_queue_interval_complete.queue_id
+	toColumn: dim_queue.queue_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 871cddbd-7b39-4fdf-aefb-2183cd2e406e
+	fromColumn: fact_service_type_interval.date_key
+	toColumn: dim_date.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 98092ea9-f595-4bdf-9ce1-7b1ab03dc9a4
+	fromColumn: fact_service_type_interval.interval_key
+	toColumn: dim_time_interval.interval_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship a48482d8-0e5f-4643-91fa-73e12e7cc04e
+	fromColumn: fact_forecast_interval.target_date_key
+	toColumn: dim_date.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 429b3b11-a4ae-4a61-bf5d-3767e061105d
+	fromColumn: fact_forecast_interval.target_interval_key
+	toColumn: dim_time_interval.interval_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship c73ff501-f728-4a87-a90e-307505643a96
+	fromColumn: fact_forecast_interval.queue_id
+	toColumn: dim_queue.queue_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 2d360199-cd56-45ca-897c-9c28a970a726
+	fromColumn: fact_staffing_requirement.target_date_key
+	toColumn: dim_date.date_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship b8b82b33-89cd-4153-8caa-8836be69e9e7
+	fromColumn: fact_staffing_requirement.target_interval_key
+	toColumn: dim_time_interval.interval_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship b282c389-dc83-48cc-9a75-ba3205ca284d
+	fromColumn: fact_staffing_requirement.queue_id
+	toColumn: dim_queue.queue_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship d18ffa1f-1c2b-417d-9f1b-473737bfd7cf
+	fromColumn: fact_service_type_interval.queue_id
+	toColumn: dim_queue.queue_id
+
+relationship 5d187c2b-dc6c-4770-acfe-b144b8a9a6cc
+	fromColumn: fact_service_type_interval.service_type_code
+	toColumn: dim_service_type.service_type_code
+

@@ -23,6 +23,14 @@ data/synthetic/*
 # Power BI temporary files
 *.pbit.tmp
 ~$*.pbix
+powerbi/*.pbix
+powerbi/*.bim
+powerbi/backups/
+powerbi/**/.pbi/
+reports/powerbi_*_preview.png
+reports/powerbi_dashboard_loaded.png
+reports/tabular_editor_*.txt
+reports/tabular_editor_*.log
 
 # IDE and OS
 .vscode/

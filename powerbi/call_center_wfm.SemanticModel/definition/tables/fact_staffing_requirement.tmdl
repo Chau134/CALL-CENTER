@@ -1,0 +1,243 @@
+table fact_staffing_requirement
+	lineageTag: 0c8a9461-e40e-4724-b67b-f4121ea9f6b6
+
+	column target_local_interval_start
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a9742551-8858-4b11-8d45-54feb7b0d028
+		summarizeBy: none
+		sourceColumn: target_local_interval_start
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 56d61c4b-1bd2-4ede-888b-99dd5ee08acf
+		summarizeBy: none
+		sourceColumn: target_date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_interval_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4bda804d-1e5c-436b-b0f1-914bc4fdca65
+		summarizeBy: none
+		sourceColumn: target_interval_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column queue_id
+		dataType: string
+		lineageTag: 5da14bf8-0b83-4d01-b577-3c9d320aeda5
+		summarizeBy: none
+		sourceColumn: queue_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column forecast_run_id
+		dataType: string
+		lineageTag: feca8616-55e9-496b-8df7-fcf8cd0414fb
+		summarizeBy: none
+		sourceColumn: forecast_run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column model_name
+		dataType: string
+		lineageTag: d50350e2-6347-4510-aa16-427a1b4672f8
+		summarizeBy: none
+		sourceColumn: model_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_metric
+		dataType: string
+		lineageTag: bc8b171e-ada6-4faf-bb05-608cf7c252c2
+		summarizeBy: none
+		sourceColumn: target_metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column forecast_agent_demand_calls
+		dataType: double
+		lineageTag: fbf0266a-797c-4d6a-8840-b9d77a216bb6
+		summarizeBy: sum
+		sourceColumn: forecast_agent_demand_calls
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column forecast_aht_proxy_seconds
+		dataType: double
+		lineageTag: 5908ffaa-acf8-4c19-9a35-818ab62c6ae6
+		summarizeBy: sum
+		sourceColumn: forecast_aht_proxy_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column workload_hours
+		dataType: double
+		lineageTag: 0be822eb-89f2-4687-ad67-a6a5eb181255
+		summarizeBy: sum
+		sourceColumn: workload_hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column interval_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: dd653de7-40b9-40a5-8df0-4c271cf8722a
+		summarizeBy: sum
+		sourceColumn: interval_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column occupancy_target
+		dataType: double
+		lineageTag: fede5252-7f3e-4e88-a48f-03fd30ba5034
+		summarizeBy: sum
+		sourceColumn: occupancy_target
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column shrinkage_rate
+		dataType: double
+		lineageTag: 128d830b-7289-4f6f-96f3-a388077f8425
+		summarizeBy: sum
+		sourceColumn: shrinkage_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column required_productive_agents
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c84acdf-c1e7-42c6-b0a5-da0f8f493286
+		summarizeBy: sum
+		sourceColumn: required_productive_agents
+
+		annotation SummarizationSetBy = Automatic
+
+	column required_scheduled_agents
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ab33c3b-e64f-41e3-baf4-93d2856435e9
+		summarizeBy: sum
+		sourceColumn: required_scheduled_agents
+
+		annotation SummarizationSetBy = Automatic
+
+	column staffing_method
+		dataType: string
+		lineageTag: 6e257be6-e942-4cfa-8cea-8c27b857c322
+		summarizeBy: none
+		sourceColumn: staffing_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column assumption_version
+		dataType: string
+		lineageTag: 6a5de7d6-49c1-4984-ab26-37ee6b1a31bb
+		summarizeBy: none
+		sourceColumn: assumption_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column actual_agent_demand_calls
+		dataType: int64
+		formatString: 0
+		lineageTag: 72abecd2-35dc-4b21-9805-3347c2a466a3
+		summarizeBy: sum
+		sourceColumn: actual_agent_demand_calls
+
+		annotation SummarizationSetBy = Automatic
+
+	column actual_aht_proxy_seconds
+		dataType: double
+		lineageTag: 2758ab8e-1f4a-4025-a054-9ed0a5726922
+		summarizeBy: sum
+		sourceColumn: actual_aht_proxy_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column actualized_workload_hours
+		dataType: double
+		lineageTag: c131a887-9b36-4fdf-8dd6-08bbc600c98d
+		summarizeBy: sum
+		sourceColumn: actualized_workload_hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column actualized_productive_agents
+		dataType: double
+		lineageTag: b9d865f7-a1ec-4134-a076-dce6f9922069
+		summarizeBy: sum
+		sourceColumn: actualized_productive_agents
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column actualized_scheduled_agents
+		dataType: double
+		lineageTag: 9a0f2385-cf8f-4e8d-a02b-3cf150528cef
+		summarizeBy: sum
+		sourceColumn: actualized_scheduled_agents
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column actualized_analysis_only
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b316b5f5-63fe-40c2-b5a0-503dba8fd100
+		summarizeBy: none
+		sourceColumn: actualized_analysis_only
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_operating_interval
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 4b3b9985-e1a5-428d-8d1c-3d1c89b1f097
+		summarizeBy: none
+		sourceColumn: is_operating_interval
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_origin
+		dataType: string
+		lineageTag: f418a77d-e14a-46b1-af50-bb25247ddb88
+		summarizeBy: none
+		sourceColumn: data_origin
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'analytics fact_staffing_requirement' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "call_center_wfm"),
+				    analytics_fact_staffing_requirement = Source{[Schema="analytics",Item="fact_staffing_requirement"]}[Data]
+				in
+				    analytics_fact_staffing_requirement
+
+	annotation PBI_ResultType = Table
+

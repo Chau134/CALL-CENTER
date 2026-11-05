@@ -1,0 +1,122 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "forecast_kpi_summary",
+  "position": {
+    "x": 30,
+    "y": 126,
+    "z": 1005,
+    "height": 170,
+    "width": 1846,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Selected Model Name"
+                }
+              },
+              "queryRef": "_Measures.Selected Model Name",
+              "nativeQueryRef": "Selected Model Name"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Selected Forecast WAPE"
+                }
+              },
+              "queryRef": "_Measures.Selected Forecast WAPE",
+              "nativeQueryRef": "Selected Forecast WAPE"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Selected Forecast Bias"
+                }
+              },
+              "queryRef": "_Measures.Selected Forecast Bias",
+              "nativeQueryRef": "Selected Forecast Bias"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Selected Forecast MAE"
+                }
+              },
+              "queryRef": "_Measures.Selected Forecast MAE",
+              "nativeQueryRef": "Selected Forecast MAE"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Selected Forecast RMSE"
+                }
+              },
+              "queryRef": "_Measures.Selected Forecast RMSE",
+              "nativeQueryRef": "Selected Forecast RMSE"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Selected Forecast Model'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "annotations": [
+    {
+      "name": "CALL_CENTER_WFM_AUTOGEN",
+      "value": "1.0.0"
+    }
+  ]
+}

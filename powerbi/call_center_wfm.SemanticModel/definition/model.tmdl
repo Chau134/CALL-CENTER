@@ -1,0 +1,36 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-GB
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["analytics dim_date","analytics dim_time_interval","analytics dim_queue","analytics dim_service_type","analytics fact_queue_interval_complete","analytics fact_service_type_interval","analytics fact_forecast_interval","analytics fact_model_evaluation","analytics fact_staffing_requirement","analytics vw_powerbi_refresh_status"]
+
+annotation CALL_CENTER_WFM_SETUP_VERSION = 1.0.0
+
+annotation __TEdtr = 1
+
+annotation CALL_CENTER_WFM_RELATIONSHIPS_VERSION = 1.0.0
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_date
+ref table dim_time_interval
+ref table dim_queue
+ref table dim_service_type
+ref table fact_queue_interval_complete
+ref table fact_service_type_interval
+ref table fact_forecast_interval
+ref table fact_model_evaluation
+ref table fact_staffing_requirement
+ref table vw_powerbi_refresh_status
+ref table _Measures
+
+ref cultureInfo en-US
+
