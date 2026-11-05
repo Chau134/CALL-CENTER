@@ -67,6 +67,8 @@ data/raw/technion/AnonymousBank
   -> data/processed/technion/dim_*.csv.gz
   -> data/processed/technion/fact_queue_interval_complete.csv.gz
   -> forecast, model evaluation và staffing requirement facts
+  -> PostgreSQL analytics dimensions/facts
+  -> KPI/Power BI serving views
 ```
 
 - `offered_calls` là toàn bộ clean calls đi vào VRU.

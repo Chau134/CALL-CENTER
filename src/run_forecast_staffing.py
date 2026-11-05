@@ -15,6 +15,7 @@ import numpy as np
 import pandas as pd
 import yaml
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
+from xgboost import XGBRegressor
 
 try:
     from .staffing import calculate_staffing_requirement
@@ -32,10 +33,13 @@ INPUT_PATH = (
     / "fact_queue_interval_complete.csv.gz"
 )
 OUTPUT_DIR = PROJECT_ROOT / "data" / "processed" / "technion"
+DIM_DATE_PATH = OUTPUT_DIR / "dim_date.csv.gz"
 REPORT_DIR = PROJECT_ROOT / "reports" / "model_evaluation"
 CONFIG_PATH = PROJECT_ROOT / "config" / "project.yml"
-MODEL_VERSION = "1.0.0"
+MODEL_VERSION = "1.1.0"
 TARGET_METRIC = "agent_demand_calls"
+XGBOOST_MODEL_NAME = "xgboost_lag_calendar"
+XGBOOST_LAG_MULTIPLIERS = (1, 2, 3, 4)
 
 
 FORECAST_COLUMNS = [
@@ -139,7 +143,97 @@ def load_series() -> pd.DataFrame:
     frame["aht_proxy_seconds"] = pd.to_numeric(
         frame["aht_proxy_seconds"], errors="coerce"
     )
+    calendar = pd.read_csv(
+        DIM_DATE_PATH,
+        usecols=[
+            "date_key",
+            "is_holiday",
+            "is_major_holiday",
+            "is_calendar_day_before_holiday",
+            "is_calendar_day_after_holiday",
+            "is_dst_transition_day",
+        ],
+    )
+    frame = frame.merge(calendar, on="date_key", how="left", validate="many_to_one")
+    calendar_flags = [column for column in calendar.columns if column != "date_key"]
+    if frame[calendar_flags].isna().any().any():
+        raise RuntimeError("Missing calendar features after joining dim_date")
     return frame
+
+
+def build_xgboost_features(frame: pd.DataFrame, period: int) -> pd.DataFrame:
+    """Create calendar and strictly pre-origin lag features for direct forecasting."""
+    timestamp = pd.to_datetime(frame["local_interval_start"])
+    interval_number = timestamp.dt.hour * 2 + timestamp.dt.minute // 30
+    day_of_week = timestamp.dt.dayofweek
+    day_of_year = timestamp.dt.dayofyear
+
+    features = pd.DataFrame(index=frame.index)
+    features["interval_number"] = interval_number.astype(float)
+    features["day_of_week"] = day_of_week.astype(float)
+    features["month_number"] = timestamp.dt.month.astype(float)
+    features["day_of_year"] = day_of_year.astype(float)
+    features["interval_sin"] = np.sin(2 * np.pi * interval_number / 48)
+    features["interval_cos"] = np.cos(2 * np.pi * interval_number / 48)
+    features["weekday_sin"] = np.sin(2 * np.pi * day_of_week / 7)
+    features["weekday_cos"] = np.cos(2 * np.pi * day_of_week / 7)
+    features["year_sin"] = np.sin(2 * np.pi * day_of_year / 365.25)
+    features["year_cos"] = np.cos(2 * np.pi * day_of_year / 365.25)
+    for column in (
+        "is_operating_interval",
+        "is_holiday",
+        "is_major_holiday",
+        "is_calendar_day_before_holiday",
+        "is_calendar_day_after_holiday",
+        "is_dst_transition_day",
+    ):
+        features[column] = frame[column].astype(int)
+
+    lag_columns: list[str] = []
+    target = frame[TARGET_METRIC].astype(float)
+    for multiplier in XGBOOST_LAG_MULTIPLIERS:
+        lag = period * multiplier
+        column = f"lag_{lag}"
+        features[column] = target.shift(lag)
+        lag_columns.append(column)
+    features["weekly_lag_mean"] = features[lag_columns].mean(axis=1)
+    features["weekly_lag_std"] = features[lag_columns].std(axis=1, ddof=0)
+    features["weekly_lag_min"] = features[lag_columns].min(axis=1)
+    features["weekly_lag_max"] = features[lag_columns].max(axis=1)
+    return features
+
+
+def xgboost_forecast(
+    features: pd.DataFrame,
+    target: np.ndarray,
+    train_end: int,
+    test_start: int,
+    horizon: int,
+    period: int,
+    parameters: dict[str, Any],
+) -> np.ndarray:
+    """Fit one fold and predict its complete horizon without recursive actuals."""
+    minimum_lag = period * min(XGBOOST_LAG_MULTIPLIERS)
+    if test_start != train_end:
+        raise ValueError("XGBoost direct forecast requires test_start = train_end")
+    if minimum_lag < horizon:
+        raise ValueError("XGBoost minimum lag must cover the full forecast horizon")
+    if test_start + horizon - 1 - minimum_lag >= train_end:
+        raise ValueError("XGBoost lag features would leak test-window actuals")
+
+    train_features = features.iloc[:train_end]
+    eligible = ~train_features.isna().any(axis=1)
+    train_features = train_features.loc[eligible]
+    train_target = target[:train_end][eligible.to_numpy()]
+    test_features = features.iloc[test_start : test_start + horizon]
+    if test_features.isna().any().any():
+        raise RuntimeError("XGBoost test features contain null values")
+    if train_features.empty:
+        raise RuntimeError("No eligible XGBoost training rows after lag creation")
+
+    model = XGBRegressor(**parameters)
+    model.fit(train_features, train_target, verbose=False)
+    return np.asarray(model.predict(test_features), dtype=float)
 
 
 def seasonal_naive(train: np.ndarray, horizon: int, period: int) -> np.ndarray:
@@ -316,8 +410,21 @@ def run_backtest(
     first_test_start = len(frame) - folds * horizon
     if first_test_start < forecast_config["minimum_training_days"] * 48:
         raise RuntimeError("Not enough history for configured backtest")
+    configured_models = set(forecast_config["baselines"]) | set(
+        forecast_config["candidate_models"]
+    )
+    implemented_models = set(model_registry()) | {XGBOOST_MODEL_NAME}
+    if configured_models != implemented_models:
+        raise RuntimeError(
+            "Configured forecast models do not match implemented models: "
+            f"configured={sorted(configured_models)}, "
+            f"implemented={sorted(implemented_models)}"
+        )
 
     target = frame[TARGET_METRIC].to_numpy(dtype=float)
+    xgboost_features = build_xgboost_features(frame, period)
+    xgboost_parameters = dict(forecast_config["xgboost_parameters"])
+    xgboost_parameters["random_state"] = int(config["project"]["random_seed"])
     generated_at = datetime.now(timezone.utc).isoformat()
     forecast_records: list[dict[str, Any]] = []
     evaluation_rows: list[dict[str, Any]] = []
@@ -334,8 +441,32 @@ def run_backtest(
         )
         aht_bounds.append((aht_lower, aht_upper))
 
-        for model_name, (forecast_type, model_function) in model_registry().items():
-            prediction = np.clip(model_function(train, horizon, period), 0, None)
+        models: list[
+            tuple[
+                str,
+                str,
+                Callable[[np.ndarray, int, int], np.ndarray] | None,
+            ]
+        ] = [
+            (name, forecast_type, model_function)
+            for name, (forecast_type, model_function) in model_registry().items()
+        ]
+        models.append((XGBOOST_MODEL_NAME, "candidate", None))
+        for model_name, forecast_type, model_function in models:
+            if model_name == XGBOOST_MODEL_NAME:
+                prediction = xgboost_forecast(
+                    xgboost_features,
+                    target,
+                    train_end,
+                    test_start,
+                    horizon,
+                    period,
+                    xgboost_parameters,
+                )
+            else:
+                assert model_function is not None
+                prediction = model_function(train, horizon, period)
+            prediction = np.clip(prediction, 0, None)
             error = actual - prediction
             operating_mask = frame.iloc[test_start:test_end][
                 "is_operating_interval"
@@ -551,6 +682,7 @@ def write_reports(
     selected_model: str,
     aht_metadata: dict[str, Any],
     output_paths: list[Path],
+    config: dict[str, Any],
 ) -> None:
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     aggregate = [row for row in evaluation_rows if row["backtest_fold"] == "ALL"]
@@ -570,6 +702,21 @@ def write_reports(
             "random_split_used": False,
         },
         "aggregate_metrics": aggregate,
+        "xgboost": {
+            "model_name": XGBOOST_MODEL_NAME,
+            "forecast_strategy": "direct multi-step",
+            "calendar_features_known_at_origin": True,
+            "lag_intervals": [
+                int(config["forecast"]["weekly_seasonality_intervals"] * multiplier)
+                for multiplier in XGBOOST_LAG_MULTIPLIERS
+            ],
+            "minimum_lag_covers_horizon": True,
+            "test_window_actuals_used_as_features": False,
+            "parameters": {
+                **config["forecast"]["xgboost_parameters"],
+                "random_state": int(config["project"]["random_seed"]),
+            },
+        },
         "aht_forecast": aht_metadata,
         "staffing": {
             "method": "capacity_workload_baseline",
@@ -643,6 +790,7 @@ def main() -> None:
         selected_model,
         aht_metadata,
         [forecast_path, evaluation_path, staffing_path],
+        config,
     )
     selected = next(
         row

@@ -82,6 +82,17 @@ forecast(t) = mean(
 - seasonal period 336;
 - negative predictions được clip về 0.
 
+### XGBoost lag + calendar
+
+- Strategy: direct multi-step cho toàn bộ horizon 7 ngày;
+- calendar features: interval trong ngày, weekday, tháng, ngày trong năm, holiday/DST và operating-hours flags đã biết tại forecast origin;
+- target lags: 336, 672, 1.008 và 1.344 interval, tương ứng cùng thời điểm của 1–4 tuần trước;
+- statistics từ bốn weekly lags: mean, standard deviation, min và max;
+- objective: `reg:squarederror`; 300 trees, depth 4, learning rate 0,05, `tree_method=hist` và seed 42;
+- negative predictions được clip về 0.
+
+Không dùng lag 30 phút hoặc 1 ngày. Với horizon 336 interval, những lag này sẽ đọc actual nằm trong chính test window ở các bước dự báo sau. Lag nhỏ nhất của XGBoost bằng đúng horizon, nên mọi target feature của từng fold đều nằm trước forecast origin.
+
 ## 5. Kết quả model selection
 
 Aggregate trên sáu rolling folds, scope `overall`:
@@ -89,10 +100,11 @@ Aggregate trên sáu rolling folds, scope `overall`:
 | Model | WAPE | Bias | MAE | RMSE |
 |---|---:|---:|---:|---:|
 | `same_weekday_interval_mean_4w` | 0,1795 | -0,0121 | 4,7801 | 8,0246 |
+| `xgboost_lag_calendar` | 0,1861 | 0,0108 | 4,9540 | 8,0561 |
 | `seasonal_naive_7d` | 0,2297 | -0,0045 | 6,1161 | 10,2972 |
 | `holt_winters_additive_damped` | 0,2781 | -0,2079 | 7,4048 | 11,9786 |
 
-Model được chọn là `same_weekday_interval_mean_4w`. Holt–Winters không được chọn chỉ vì phức tạp hơn.
+Model được chọn là `same_weekday_interval_mean_4w`. XGBoost đứng thứ hai nhưng WAPE cao hơn baseline khoảng 0,65 điểm phần trăm, nên chưa được dùng để tạo staffing forecast. Kết quả này cũng cho thấy không nên chọn mô hình chỉ vì phức tạp hơn.
 
 Ở operating intervals, model được chọn có WAPE 0,1772 và bias -0,0119. WAPE ở closed intervals cao do mẫu số actual rất nhỏ; phải đọc cùng actual volume, không dùng riêng tỷ lệ này để kết luận chất lượng tổng thể.
 
@@ -149,6 +161,8 @@ data/processed/technion/fact_staffing_requirement.csv.gz
 reports/model_evaluation/forecast_evaluation.json
 reports/model_evaluation/forecast_evaluation.md
 ```
+
+Artifacts hiện có 8.064 forecast rows (4 models × 6 folds × 336 interval), 84 evaluation rows và 336 staffing rows.
 
 Chạy lại và kiểm tra:
 

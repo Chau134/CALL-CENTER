@@ -357,9 +357,9 @@ Baseline tốt nhất là mốc để mô hình nâng cao phải vượt qua. N�
 
 ### Bước 8 — Huấn luyện và chọn forecast model
 
-**Trạng thái: hoàn thành phiên bản MVP.** Baseline trung bình 4 tuần được chọn với aggregate WAPE 0,1795; Holt–Winters không vượt baseline.
+**Trạng thái: hoàn thành phiên bản MVP.** Đã so sánh seasonal naive, trung bình cùng weekday/interval 4 tuần, Holt–Winters và XGBoost trên cùng 6 rolling folds. Baseline trung bình 4 tuần được chọn với aggregate WAPE 0,1795; XGBoost đứng thứ hai với WAPE 0,1861, Holt–Winters không vượt baseline.
 
-Thử Holt-Winters với daily/weekly seasonality phù hợp dữ liệu. SARIMA là stretch goal. Lưu cho mỗi forecast:
+XGBoost dùng calendar features và weekly lags 336/672/1.008/1.344 interval; không dùng lag ngắn có thể đọc actual trong test horizon. SARIMA là stretch goal. Lưu cho mỗi forecast:
 
 ```text
 forecast_run_at, target_interval, queue_id, model_name,
@@ -397,6 +397,8 @@ Xuất `fact_staffing_interval` gồm forecast workload, productive requirement,
 
 ### Bước 11 — Xây PostgreSQL
 
+**Trạng thái: hoàn thành cho 9 marts hiện có.** Đã tạo dimensions/facts với PK, FK, check constraints và indexes; transactional full-snapshot loader đã load 131.544 rows và đối soát khớp source. Chín Power BI/KPI views và load audit đã được tạo trong schema `analytics`.
+
 Thực hiện theo thứ tự:
 
 1. Tạo schema `raw`, `staging`, `analytics`.
@@ -409,6 +411,8 @@ Thực hiện theo thứ tự:
 ETL phải idempotent: chạy lại cùng input không tạo duplicate.
 
 ### Bước 12 — Viết SQL phân tích
+
+**Trạng thái: hoàn thành phần dữ liệu hiện có.** Đã có executive KPI, peak interval dùng window function, forecast accuracy theo tuần/model, rolling 7/28-day volume/AHT proxy và planned staffing requirement. Các query understaffing, attendance, agent/team ranking chờ workforce marts; không mô phỏng KPI khi chưa có denominator hợp lệ.
 
 Các query portfolio bắt buộc:
 

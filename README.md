@@ -2,7 +2,7 @@
 
 Dự án portfolio mô phỏng quy trình Workforce Management (WFM) cho một Call Center: từ dữ liệu cuộc gọi, dự báo volume, tính nhu cầu nhân sự, theo dõi staffing gap đến dashboard vận hành.
 
-> Trạng thái hiện tại: dữ liệu Technion đủ 12 tháng đã được audit, ETL và đối soát; foundation marts đủ 17.520 interval đã hoàn thành. Sáu rolling backtest folds, ba models, AHT proxy forecast và workload-based staffing requirement đã chạy thật. Chưa tạo schedule/attendance/state synthetic, chưa load warehouse marts vào PostgreSQL và chưa làm Power BI.
+> Trạng thái hiện tại: dữ liệu Technion đủ 12 tháng đã được audit, ETL và đối soát; foundation marts đủ 17.520 interval đã hoàn thành. Sáu rolling backtest folds, bốn models (gồm XGBoost), AHT proxy forecast và workload-based staffing requirement đã chạy thật. Chín marts đã được load vào PostgreSQL `analytics` với 9 KPI/Power BI views và đối soát đạt. Baseline trung bình 4 tuần hiện được chọn theo WAPE. Chưa tạo schedule/attendance/state synthetic và chưa làm Power BI.
 
 ## Mục tiêu MVP
 
@@ -33,6 +33,7 @@ Các quyết định đã khóa nằm trong:
 - [docs/etl_rules.md](docs/etl_rules.md): quy tắc sửa lỗi, phân luồng, trường dẫn xuất và interval mart.
 - [docs/missing_fields_plan.md](docs/missing_fields_plan.md): data dictionary và thứ tự bổ sung các trường còn thiếu.
 - [docs/forecast_staffing_methodology.md](docs/forecast_staffing_methodology.md): target, backtest, model selection, AHT proxy và staffing assumptions.
+- [docs/postgresql_powerbi_guide.md](docs/postgresql_powerbi_guide.md): warehouse schema, loader, KPI views và hướng dẫn kết nối Power BI.
 
 ## Chạy và kiểm tra ETL
 
@@ -53,6 +54,15 @@ python src/validate_forecast_staffing.py
 ```
 
 Marts nằm tại `data/processed/technion/`. Báo cáo model gần nhất nằm tại `reports/model_evaluation/forecast_evaluation.md`.
+
+## Load PostgreSQL analytics warehouse
+
+```powershell
+python src/load_analytics_marts.py
+python src/validate_analytics_warehouse.py
+```
+
+DDL nằm trong `sql/01_analytics_schema.sql`; KPI views và query mẫu nằm trong `sql/02_powerbi_views.sql`, `sql/03_powerbi_kpi_queries.sql`. Báo cáo đối soát gần nhất nằm tại `reports/data_quality/postgres_warehouse_reconciliation.md`.
 
 ## Kiến trúc dự kiến
 

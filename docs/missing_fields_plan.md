@@ -14,7 +14,7 @@ Hiện trạng đầu vào sau ETL:
 - có 52 agent ID đã được giả danh;
 - dữ liệu nguồn/call-level ETL không có schedule, attendance, agent state, team, holiday, hold, ACW, CSAT hoặc FCR; holiday sau đó được bổ sung như external calendar reference, không phải source-observed field.
 
-**Trạng thái triển khai ngày 05/11/2026:** P0 foundation marts, rolling-origin forecast, AHT proxy forecast và workload-based staffing requirement đã hoàn thành. Workforce extension dùng schedule/attendance/state synthetic chưa được thực hiện.
+**Trạng thái triển khai ngày 05/11/2026:** P0 foundation marts, rolling-origin forecast, AHT proxy forecast, workload-based staffing requirement và PostgreSQL analytics warehouse đã hoàn thành. Chín marts/9 KPI views đã được load và đối soát. Workforce extension dùng schedule/attendance/state synthetic chưa được thực hiện.
 
 Tài liệu này không cho phép sửa raw data hoặc điền giá trị không có bằng giá trị 0 nếu chưa có quy tắc nghiệp vụ.
 
@@ -483,7 +483,7 @@ mọi interval có coverage_status
 
 1. Chạy EDA trên mart đã hoàn chỉnh.
 2. Tạo baseline seasonal-naive và rolling-origin backtest/time-based split; không random split call records.
-3. So sánh baseline với candidate models bằng MAE/WAPE và kiểm tra leakage.
+3. So sánh baseline với Holt–Winters và XGBoost bằng MAE/WAPE và kiểm tra leakage. Đã hoàn thành với 6 rolling folds; XGBoost dùng weekly lags không đọc actual trong test horizon.
 4. Tạo `fact_forecast_interval`.
 5. Forecast volume và AHT proxy.
 6. Tạo `fact_staffing_requirement` bằng workload-based baseline; ghi rõ chưa phải Erlang C.
@@ -596,7 +596,7 @@ Các thuộc tính thuộc nhóm thứ hai phải để null nếu chưa mô ph�
 - `fact_forecast_interval`
 - `fact_staffing_requirement`
 
-Trạng thái: các bảng trong danh sách này đã được tạo dưới `data/processed/technion/`; model evaluation và staffing validator đã pass. EDA trực quan, PostgreSQL warehouse và Power BI vẫn là các bước tiếp theo.
+Trạng thái: các bảng trong danh sách này đã được tạo dưới `data/processed/technion/`, load vào PostgreSQL schema `analytics`; model evaluation, staffing và warehouse validators đã pass. EDA trực quan và Power BI là các bước tiếp theo.
 
 Mục tiêu: chứng minh ETL, data quality, SQL, EDA, time-series forecasting, workload/staffing calculation và Power BI dashboard.
 
@@ -626,7 +626,7 @@ Chỉ triển khai nếu phần MVP đã hoàn thiện và có thời gian mở 
 - [ ] Chốt grain của queue interval và service type interval.
 - [ ] Bổ sung `fact_service_type_interval`.
 - [ ] Chốt định nghĩa offered, answered, abandoned, SLA, AHT proxy và các quy tắc loại trừ.
-- [ ] Chốt baseline forecast, rolling-origin backtest và metric MAE/WAPE.
+- [x] Chốt baseline forecast, rolling-origin backtest và metric MAE/WAPE; đã so sánh bốn models gồm XGBoost.
 - [ ] Ghi rõ staffing calculation là workload-based approximation hay Erlang C.
 - [ ] Giữ agent attributes không có nguồn ở trạng thái null cho đến khi có mô phỏng được phê duyệt.
 - [ ] Tách KPI observed khỏi KPI synthetic trên data model và dashboard.

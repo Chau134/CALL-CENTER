@@ -9,11 +9,21 @@ from collections import Counter
 import pandas as pd
 
 try:
-    from .run_forecast_staffing import OUTPUT_DIR, REPORT_DIR
+    from .run_forecast_staffing import (
+        OUTPUT_DIR,
+        REPORT_DIR,
+        XGBOOST_MODEL_NAME,
+        model_registry,
+    )
     from .staffing import calculate_staffing_requirement
     from .transform_calls import sha256
 except ImportError:  # Support direct execution.
-    from run_forecast_staffing import OUTPUT_DIR, REPORT_DIR
+    from run_forecast_staffing import (
+        OUTPUT_DIR,
+        REPORT_DIR,
+        XGBOOST_MODEL_NAME,
+        model_registry,
+    )
     from staffing import calculate_staffing_requirement
     from transform_calls import sha256
 
@@ -36,12 +46,14 @@ def main() -> None:
     forecast = read_csv("fact_forecast_interval.csv.gz")
     evaluation = read_csv("fact_model_evaluation.csv.gz")
     staffing = read_csv("fact_staffing_requirement.csv.gz")
+    expected_models = set(model_registry()) | {XGBOOST_MODEL_NAME}
+    model_count = len(expected_models)
 
-    assert len(forecast) == 3 * 6 * 336
-    assert len(evaluation) == 3 * 6 * 3 + 3 * 3
+    assert len(forecast) == model_count * 6 * 336
+    assert len(evaluation) == model_count * 6 * 3 + model_count * 3
     assert len(staffing) == 336
-    assert forecast["forecast_run_id"].nunique() == 18
-    assert forecast["model_name"].nunique() == 3
+    assert forecast["forecast_run_id"].nunique() == model_count * 6
+    assert set(forecast["model_name"]) == expected_models
     assert forecast["backtest_fold"].nunique() == 6
     assert forecast["target_metric"].eq("agent_demand_calls").all()
     assert forecast["forecast_agent_demand_calls"].ge(0).all()
@@ -76,10 +88,15 @@ def main() -> None:
         (evaluation["backtest_fold"].astype(str) == "ALL")
         & (evaluation["evaluation_scope"] == "overall")
     ]
-    assert len(aggregate) == 3
+    assert len(aggregate) == model_count
     selected_row = aggregate.loc[aggregate["model_name"] == selected_model].iloc[0]
     assert selected_row["wape"] == aggregate["wape"].min()
     assert bool(selected_row["is_selected_model"])
+    assert min(report["xgboost"]["lag_intervals"]) >= report["backtest"][
+        "horizon_intervals"
+    ]
+    assert report["xgboost"]["test_window_actuals_used_as_features"] is False
+    assert report["xgboost"]["minimum_lag_covers_horizon"] is True
 
     selected_final = forecast[
         (forecast["model_name"] == selected_model)

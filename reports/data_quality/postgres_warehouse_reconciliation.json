@@ -1,0 +1,56 @@
+{
+  "generated_at_utc": "2026-11-05T09:01:58.995135+00:00",
+  "database": "call_center_wfm",
+  "status": "passed",
+  "source_row_counts": {
+    "dim_date": 365,
+    "dim_time_interval": 48,
+    "dim_queue": 1,
+    "dim_service_type": 6,
+    "fact_queue_interval_complete": 17520,
+    "fact_service_type_interval": 105120,
+    "fact_forecast_interval": 8064,
+    "fact_model_evaluation": 84,
+    "fact_staffing_requirement": 336
+  },
+  "database_row_counts": {
+    "dim_date": 365,
+    "dim_time_interval": 48,
+    "dim_queue": 1,
+    "dim_service_type": 6,
+    "fact_queue_interval_complete": 17520,
+    "fact_service_type_interval": 105120,
+    "fact_forecast_interval": 8064,
+    "fact_model_evaluation": 84,
+    "fact_staffing_requirement": 336
+  },
+  "total_loaded_rows": 131544,
+  "queue_totals": {
+    "offered_calls": 440844,
+    "agent_demand_calls": 417149,
+    "answered_calls": 353143,
+    "abandoned_calls": 87701,
+    "queue_abandoned_calls": 64006,
+    "vru_abandoned_calls": 23695
+  },
+  "selected_model": "same_weekday_interval_mean_4w",
+  "views_verified": [
+    "vw_kpi_daily_queue",
+    "vw_kpi_forecast_weekly_model",
+    "vw_kpi_service_type_daily",
+    "vw_kpi_staffing_daily",
+    "vw_powerbi_forecast_interval",
+    "vw_powerbi_model_evaluation",
+    "vw_powerbi_queue_interval",
+    "vw_powerbi_refresh_status",
+    "vw_powerbi_staffing_interval"
+  ],
+  "latest_load_id": 2,
+  "latest_loaded_at_utc": "2026-11-05T16:01:47.078838+07:00",
+  "executive_kpis": {
+    "answer_rate": 0.8010611463465535,
+    "abandon_rate": 0.19893885365344657,
+    "service_level_rate": 0.4646313160951601,
+    "aht_proxy_seconds": 194.25192132869657
+  }
+}

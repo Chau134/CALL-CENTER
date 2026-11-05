@@ -22,6 +22,8 @@ def test_config_has_locked_mvp_scope() -> None:
     assert config["forecast"]["target"] == "agent_demand_calls"
     assert config["forecast"]["reporting_volume"] == "offered_calls"
     assert config["forecast"]["aht_target"] == "aht_proxy_seconds"
+    assert "xgboost_lag_calendar" in config["forecast"]["candidate_models"]
+    assert config["forecast"]["xgboost_parameters"]["objective"] == "reg:squarederror"
 
 
 def test_workforce_assumptions_are_valid_rates() -> None:
