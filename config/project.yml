@@ -1,0 +1,69 @@
+project:
+  name: call-center-wfm-analytics
+  version: "0.1.0"
+  locale: vi_VN
+  timezone: Asia/Jerusalem
+  data_classification: public_observed_with_derived_fields
+  random_seed: 42
+
+scope:
+  channel: inbound_voice
+  queues:
+    - INBOUND_SUPPORT
+  interval_minutes: 30
+  include_transfers: false
+  agent_staffed_hours:
+    sunday: ["07:00", "24:00"]
+    monday: ["07:00", "24:00"]
+    tuesday: ["07:00", "24:00"]
+    wednesday: ["07:00", "24:00"]
+    thursday: ["07:00", "24:00"]
+    friday: ["00:00", "14:00"]
+    saturday: ["20:00", "24:00"]
+
+service_level:
+  target_rate: 0.80
+  answer_threshold_seconds: 20
+  short_abandon_threshold_seconds: 5
+  exclude_short_abandons_from_denominator: true
+
+workforce:
+  occupancy_target: 0.85
+  shrinkage_rate: 0.30
+  login_grace_minutes: 5
+  rounding: ceiling
+  staffing_method_mvp: capacity
+  staffing_method_stretch: erlang_c
+
+forecast:
+  target: offered_calls
+  aht_target: aht_seconds
+  horizon_days: 7
+  minimum_training_days: 84
+  backtest_folds: 6
+  backtest_step_days: 7
+  weekly_seasonality_intervals: 336
+  primary_metric: wape
+  secondary_metrics:
+    - bias
+    - mae
+    - rmse
+  baselines:
+    - seasonal_naive_7d
+    - same_weekday_interval_mean_4w
+  candidate_models:
+    - holt_winters
+
+quality:
+  fail_on_duplicate_call_id: true
+  fail_on_negative_duration: true
+  fail_on_orphan_keys: true
+  raw_to_mart_call_count_tolerance: 0
+  rate_comparison_tolerance: 0.0001
+
+synthetic_data:
+  start_date: "2025-01-01"
+  end_date: "2025-12-31"
+  agent_count: 150
+  team_count: 10
+  watermark: SYNTHETIC DATA - FOR PORTFOLIO DEMONSTRATION ONLY

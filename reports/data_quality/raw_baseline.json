@@ -1,0 +1,923 @@
+{
+  "baseline_version": "1.0.0",
+  "generated_at_utc": "2026-11-04T12:33:08.630251+00:00",
+  "purpose": "Pre-ETL reconciliation evidence; contains aggregate data only.",
+  "source": {
+    "dataset": "Technion Anonymous Bank Call-Center Data",
+    "period": "1999-01-01/1999-12-31",
+    "raw_directory": "data/raw/technion/AnonymousBank",
+    "artifacts": {
+      "AnonymousBank.rar": {
+        "size_bytes": 10625021,
+        "sha256": "110527823a296e3163566f5d10d687e13859c60d963fd403d4623d89c7cadc4b"
+      },
+      "documentation.pdf": {
+        "size_bytes": 35223,
+        "sha256": "77816db694fdee313a7d612e22199d87632ddca5a82f17c3258bd6799ff6e045"
+      }
+    }
+  },
+  "expected_schema": [
+    "vru+line",
+    "call_id",
+    "customer_id",
+    "priority",
+    "type",
+    "date",
+    "vru_entry",
+    "vru_exit",
+    "vru_time",
+    "q_start",
+    "q_exit",
+    "q_time",
+    "outcome",
+    "ser_start",
+    "ser_exit",
+    "ser_time",
+    "server"
+  ],
+  "summary": {
+    "monthly_file_count": 12,
+    "total_raw_rows": 444448,
+    "structurally_well_formed_rows": 444436,
+    "malformed_delimiter_rows": 12,
+    "date_min": "1999-01-01",
+    "date_max": "1999-12-31",
+    "distinct_agent_labels_names_suppressed": 52,
+    "outcome_counts_raw": {
+      "0:00:00": 12,
+      "AGENT": 353143,
+      "HANG": 87694,
+      "PHANTOM": 3599
+    },
+    "service_type_counts_raw": {
+      "990703": 1,
+      "990706": 1,
+      "990717": 1,
+      "990719": 1,
+      "990729": 1,
+      "990802": 1,
+      "990809": 1,
+      "990812": 1,
+      "990830": 1,
+      "990914": 1,
+      "991026": 2,
+      "AA": 5,
+      "IN": 20727,
+      "NE": 39342,
+      "NW": 67727,
+      "PE": 1824,
+      "PS": 302521,
+      "TT": 12290
+    },
+    "priority_counts_raw": {
+      "0": 235156,
+      "0       IN": 5,
+      "0       NW": 1,
+      "0       PS": 1,
+      "0       TT": 5,
+      "1": 71827,
+      "2": 137453
+    },
+    "unexpected_outcomes": {
+      "0:00:00": 12
+    },
+    "unexpected_service_types": {
+      "990703": 1,
+      "990706": 1,
+      "990717": 1,
+      "990719": 1,
+      "990729": 1,
+      "990802": 1,
+      "990809": 1,
+      "990812": 1,
+      "990830": 1,
+      "990914": 1,
+      "991026": 2,
+      "AA": 5
+    },
+    "unexpected_priorities": {
+      "0       IN": 5,
+      "0       NW": 1,
+      "0       PS": 1,
+      "0       TT": 5
+    },
+    "invalid_duration_counts": {
+      "q_time": 12,
+      "ser_time": 12,
+      "vru_time": 12
+    },
+    "negative_duration_counts": {
+      "q_time": 0,
+      "ser_time": 0,
+      "vru_time": 350
+    },
+    "duplicate_vru_line_call_id_rows_within_month": 0
+  },
+  "files": [
+    {
+      "file_name": "April1999.txt",
+      "size_bytes": 3364875,
+      "sha256": "cf51f7f2c8d19ae68181d0b51f3e41ce58a5d5d97c4d81dada728f061fd6211d",
+      "row_count": 32036,
+      "column_count": 17,
+      "schema_matches_expected": true,
+      "date_min": "1999-04-01",
+      "date_max": "1999-04-30",
+      "outcome_counts_raw": {
+        "AGENT": 23583,
+        "HANG": 8148,
+        "PHANTOM": 305
+      },
+      "service_type_counts_raw": {
+        "AA": 1,
+        "IN": 451,
+        "NE": 2776,
+        "NW": 4760,
+        "PE": 117,
+        "PS": 22551,
+        "TT": 1380
+      },
+      "priority_counts_raw": {
+        "0": 13880,
+        "1": 6274,
+        "2": 11882
+      },
+      "blank_counts": {
+        "vru+line": 0,
+        "call_id": 0,
+        "customer_id": 0,
+        "priority": 0,
+        "type": 0,
+        "date": 0,
+        "vru_entry": 0,
+        "vru_exit": 0,
+        "vru_time": 0,
+        "q_start": 0,
+        "q_exit": 0,
+        "q_time": 0,
+        "outcome": 0,
+        "ser_start": 0,
+        "ser_exit": 0,
+        "ser_time": 0,
+        "server": 0
+      },
+      "invalid_duration_counts": {
+        "vru_time": 0,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "negative_duration_counts": {
+        "vru_time": 37,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "duplicate_vru_line_call_id_rows": 0,
+      "malformed_delimiter_rows": []
+    },
+    {
+      "file_name": "August1999.txt",
+      "size_bytes": 4335396,
+      "sha256": "2a61cf61d52cc62d18d0fe96f89aae8b5378d5b345775ecfcbe704bf30d9af60",
+      "row_count": 42078,
+      "column_count": 17,
+      "schema_matches_expected": true,
+      "date_min": "1999-08-01",
+      "date_max": "1999-08-31",
+      "outcome_counts_raw": {
+        "0:00:00": 4,
+        "AGENT": 31402,
+        "HANG": 10362,
+        "PHANTOM": 310
+      },
+      "service_type_counts_raw": {
+        "990802": 1,
+        "990809": 1,
+        "990812": 1,
+        "990830": 1,
+        "IN": 3561,
+        "NE": 3381,
+        "NW": 6923,
+        "PE": 181,
+        "PS": 27311,
+        "TT": 717
+      },
+      "priority_counts_raw": {
+        "0": 23108,
+        "0       IN": 2,
+        "0       PS": 1,
+        "0       TT": 1,
+        "1": 6573,
+        "2": 12393
+      },
+      "blank_counts": {
+        "vru+line": 0,
+        "call_id": 0,
+        "customer_id": 0,
+        "priority": 0,
+        "type": 0,
+        "date": 0,
+        "vru_entry": 0,
+        "vru_exit": 0,
+        "vru_time": 0,
+        "q_start": 0,
+        "q_exit": 0,
+        "q_time": 0,
+        "outcome": 0,
+        "ser_start": 0,
+        "ser_exit": 0,
+        "ser_time": 0,
+        "server": 4
+      },
+      "invalid_duration_counts": {
+        "vru_time": 4,
+        "q_time": 4,
+        "ser_time": 4
+      },
+      "negative_duration_counts": {
+        "vru_time": 19,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "duplicate_vru_line_call_id_rows": 0,
+      "malformed_delimiter_rows": [
+        {
+          "line_number": 7805,
+          "field_count": 16,
+          "expected_field_count": 17
+        },
+        {
+          "line_number": 10822,
+          "field_count": 16,
+          "expected_field_count": 17
+        },
+        {
+          "line_number": 12008,
+          "field_count": 16,
+          "expected_field_count": 17
+        },
+        {
+          "line_number": 12149,
+          "field_count": 16,
+          "expected_field_count": 17
+        }
+      ]
+    },
+    {
+      "file_name": "December1999.txt",
+      "size_bytes": 4462235,
+      "sha256": "1c723ffc05d1567d59025b1b68079739bc4c339f80aafba4398ee80f639a3209",
+      "row_count": 43065,
+      "column_count": 17,
+      "schema_matches_expected": true,
+      "date_min": "1999-12-01",
+      "date_max": "1999-12-31",
+      "outcome_counts_raw": {
+        "AGENT": 34083,
+        "HANG": 8648,
+        "PHANTOM": 334
+      },
+      "service_type_counts_raw": {
+        "IN": 4067,
+        "NE": 4168,
+        "NW": 4780,
+        "PE": 164,
+        "PS": 28821,
+        "TT": 1065
+      },
+      "priority_counts_raw": {
+        "0": 21311,
+        "1": 7937,
+        "2": 13817
+      },
+      "blank_counts": {
+        "vru+line": 0,
+        "call_id": 0,
+        "customer_id": 0,
+        "priority": 0,
+        "type": 0,
+        "date": 0,
+        "vru_entry": 0,
+        "vru_exit": 0,
+        "vru_time": 0,
+        "q_start": 0,
+        "q_exit": 0,
+        "q_time": 0,
+        "outcome": 0,
+        "ser_start": 0,
+        "ser_exit": 0,
+        "ser_time": 0,
+        "server": 0
+      },
+      "invalid_duration_counts": {
+        "vru_time": 0,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "negative_duration_counts": {
+        "vru_time": 20,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "duplicate_vru_line_call_id_rows": 0,
+      "malformed_delimiter_rows": []
+    },
+    {
+      "file_name": "February1999.txt",
+      "size_bytes": 3453308,
+      "sha256": "4004237dcb32355816e9bf98b9a61401ec4ded56c5c66c4a51d3e78f9802cf46",
+      "row_count": 33344,
+      "column_count": 17,
+      "schema_matches_expected": true,
+      "date_min": "1999-02-01",
+      "date_max": "1999-02-28",
+      "outcome_counts_raw": {
+        "AGENT": 27162,
+        "HANG": 5904,
+        "PHANTOM": 278
+      },
+      "service_type_counts_raw": {
+        "IN": 293,
+        "NE": 2750,
+        "NW": 7604,
+        "PE": 149,
+        "PS": 21460,
+        "TT": 1088
+      },
+      "priority_counts_raw": {
+        "0": 19602,
+        "1": 4623,
+        "2": 9119
+      },
+      "blank_counts": {
+        "vru+line": 0,
+        "call_id": 0,
+        "customer_id": 0,
+        "priority": 0,
+        "type": 0,
+        "date": 0,
+        "vru_entry": 0,
+        "vru_exit": 0,
+        "vru_time": 0,
+        "q_start": 0,
+        "q_exit": 0,
+        "q_time": 0,
+        "outcome": 0,
+        "ser_start": 0,
+        "ser_exit": 0,
+        "ser_time": 0,
+        "server": 0
+      },
+      "invalid_duration_counts": {
+        "vru_time": 0,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "negative_duration_counts": {
+        "vru_time": 25,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "duplicate_vru_line_call_id_rows": 0,
+      "malformed_delimiter_rows": []
+    },
+    {
+      "file_name": "January1999.txt",
+      "size_bytes": 3273725,
+      "sha256": "0274cfb02703a5ffadc7d381064cb177ac0b4be2fe6ce439283e80d95de9103f",
+      "row_count": 31599,
+      "column_count": 17,
+      "schema_matches_expected": true,
+      "date_min": "1999-01-01",
+      "date_max": "1999-01-31",
+      "outcome_counts_raw": {
+        "AGENT": 27060,
+        "HANG": 4299,
+        "PHANTOM": 240
+      },
+      "service_type_counts_raw": {
+        "AA": 2,
+        "IN": 295,
+        "NE": 1586,
+        "NW": 5582,
+        "PE": 164,
+        "PS": 22998,
+        "TT": 972
+      },
+      "priority_counts_raw": {
+        "0": 18224,
+        "1": 4530,
+        "2": 8845
+      },
+      "blank_counts": {
+        "vru+line": 0,
+        "call_id": 0,
+        "customer_id": 0,
+        "priority": 0,
+        "type": 0,
+        "date": 0,
+        "vru_entry": 0,
+        "vru_exit": 0,
+        "vru_time": 0,
+        "q_start": 0,
+        "q_exit": 0,
+        "q_time": 0,
+        "outcome": 0,
+        "ser_start": 0,
+        "ser_exit": 0,
+        "ser_time": 0,
+        "server": 0
+      },
+      "invalid_duration_counts": {
+        "vru_time": 0,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "negative_duration_counts": {
+        "vru_time": 33,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "duplicate_vru_line_call_id_rows": 0,
+      "malformed_delimiter_rows": []
+    },
+    {
+      "file_name": "July1999.txt",
+      "size_bytes": 4052059,
+      "sha256": "80012ee43912072e26c3fc00369a925e75102b61776e25130bfac8750addd9b0",
+      "row_count": 39022,
+      "column_count": 17,
+      "schema_matches_expected": true,
+      "date_min": "1999-07-01",
+      "date_max": "1999-07-31",
+      "outcome_counts_raw": {
+        "0:00:00": 5,
+        "AGENT": 29596,
+        "HANG": 9043,
+        "PHANTOM": 378
+      },
+      "service_type_counts_raw": {
+        "990703": 1,
+        "990706": 1,
+        "990717": 1,
+        "990719": 1,
+        "990729": 1,
+        "AA": 1,
+        "IN": 1200,
+        "NE": 3536,
+        "NW": 5723,
+        "PE": 160,
+        "PS": 27269,
+        "TT": 1128
+      },
+      "priority_counts_raw": {
+        "0": 17216,
+        "0       IN": 2,
+        "0       TT": 3,
+        "1": 7583,
+        "2": 14218
+      },
+      "blank_counts": {
+        "vru+line": 0,
+        "call_id": 0,
+        "customer_id": 0,
+        "priority": 0,
+        "type": 0,
+        "date": 0,
+        "vru_entry": 0,
+        "vru_exit": 0,
+        "vru_time": 0,
+        "q_start": 0,
+        "q_exit": 0,
+        "q_time": 0,
+        "outcome": 0,
+        "ser_start": 0,
+        "ser_exit": 0,
+        "ser_time": 0,
+        "server": 5
+      },
+      "invalid_duration_counts": {
+        "vru_time": 5,
+        "q_time": 5,
+        "ser_time": 5
+      },
+      "negative_duration_counts": {
+        "vru_time": 46,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "duplicate_vru_line_call_id_rows": 0,
+      "malformed_delimiter_rows": [
+        {
+          "line_number": 9144,
+          "field_count": 16,
+          "expected_field_count": 17
+        },
+        {
+          "line_number": 9238,
+          "field_count": 16,
+          "expected_field_count": 17
+        },
+        {
+          "line_number": 12080,
+          "field_count": 16,
+          "expected_field_count": 17
+        },
+        {
+          "line_number": 15212,
+          "field_count": 16,
+          "expected_field_count": 17
+        },
+        {
+          "line_number": 15390,
+          "field_count": 16,
+          "expected_field_count": 17
+        }
+      ]
+    },
+    {
+      "file_name": "June1999.txt",
+      "size_bytes": 3950119,
+      "sha256": "29c6c4f2202c2a1771ed0c490ba708cf3fc798afe664fd3058d78df76adec495",
+      "row_count": 37935,
+      "column_count": 17,
+      "schema_matches_expected": true,
+      "date_min": "1999-06-01",
+      "date_max": "1999-06-30",
+      "outcome_counts_raw": {
+        "AGENT": 31193,
+        "HANG": 6420,
+        "PHANTOM": 322
+      },
+      "service_type_counts_raw": {
+        "IN": 483,
+        "NE": 3776,
+        "NW": 5832,
+        "PE": 156,
+        "PS": 26608,
+        "TT": 1080
+      },
+      "priority_counts_raw": {
+        "0": 20076,
+        "1": 5666,
+        "2": 12193
+      },
+      "blank_counts": {
+        "vru+line": 0,
+        "call_id": 0,
+        "customer_id": 0,
+        "priority": 0,
+        "type": 0,
+        "date": 0,
+        "vru_entry": 0,
+        "vru_exit": 0,
+        "vru_time": 0,
+        "q_start": 0,
+        "q_exit": 0,
+        "q_time": 0,
+        "outcome": 0,
+        "ser_start": 0,
+        "ser_exit": 0,
+        "ser_time": 0,
+        "server": 0
+      },
+      "invalid_duration_counts": {
+        "vru_time": 0,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "negative_duration_counts": {
+        "vru_time": 27,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "duplicate_vru_line_call_id_rows": 0,
+      "malformed_delimiter_rows": []
+    },
+    {
+      "file_name": "March1999.txt",
+      "size_bytes": 4084663,
+      "sha256": "3d95552ceff76390d8bd78aa7d166fb2fd077cb74a8b08f2000ab1334ce9a118",
+      "row_count": 38801,
+      "column_count": 17,
+      "schema_matches_expected": true,
+      "date_min": "1999-03-01",
+      "date_max": "1999-03-31",
+      "outcome_counts_raw": {
+        "AGENT": 27847,
+        "HANG": 10547,
+        "PHANTOM": 407
+      },
+      "service_type_counts_raw": {
+        "IN": 503,
+        "NE": 3490,
+        "NW": 6732,
+        "PE": 163,
+        "PS": 25910,
+        "TT": 2003
+      },
+      "priority_counts_raw": {
+        "0": 15490,
+        "1": 7844,
+        "2": 15467
+      },
+      "blank_counts": {
+        "vru+line": 0,
+        "call_id": 0,
+        "customer_id": 0,
+        "priority": 0,
+        "type": 0,
+        "date": 0,
+        "vru_entry": 0,
+        "vru_exit": 0,
+        "vru_time": 0,
+        "q_start": 0,
+        "q_exit": 0,
+        "q_time": 0,
+        "outcome": 0,
+        "ser_start": 0,
+        "ser_exit": 0,
+        "ser_time": 0,
+        "server": 0
+      },
+      "invalid_duration_counts": {
+        "vru_time": 0,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "negative_duration_counts": {
+        "vru_time": 27,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "duplicate_vru_line_call_id_rows": 0,
+      "malformed_delimiter_rows": []
+    },
+    {
+      "file_name": "May1999.txt",
+      "size_bytes": 4146417,
+      "sha256": "9efbd488959bbd8cf3489140fa599784364d41f334bc9a1db29e95b611308325",
+      "row_count": 39553,
+      "column_count": 17,
+      "schema_matches_expected": true,
+      "date_min": "1999-05-01",
+      "date_max": "1999-05-31",
+      "outcome_counts_raw": {
+        "AGENT": 29923,
+        "HANG": 9212,
+        "PHANTOM": 418
+      },
+      "service_type_counts_raw": {
+        "IN": 492,
+        "NE": 4011,
+        "NW": 5126,
+        "PE": 146,
+        "PS": 28482,
+        "TT": 1296
+      },
+      "priority_counts_raw": {
+        "0": 17917,
+        "1": 7164,
+        "2": 14472
+      },
+      "blank_counts": {
+        "vru+line": 0,
+        "call_id": 0,
+        "customer_id": 0,
+        "priority": 0,
+        "type": 0,
+        "date": 0,
+        "vru_entry": 0,
+        "vru_exit": 0,
+        "vru_time": 0,
+        "q_start": 0,
+        "q_exit": 0,
+        "q_time": 0,
+        "outcome": 0,
+        "ser_start": 0,
+        "ser_exit": 0,
+        "ser_time": 0,
+        "server": 0
+      },
+      "invalid_duration_counts": {
+        "vru_time": 0,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "negative_duration_counts": {
+        "vru_time": 78,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "duplicate_vru_line_call_id_rows": 0,
+      "malformed_delimiter_rows": []
+    },
+    {
+      "file_name": "November1999.txt",
+      "size_bytes": 4281181,
+      "sha256": "20df9fc55b894fd8695540e5060e0ed74dc0c6c7ad596d4a97113932e2483511",
+      "row_count": 41019,
+      "column_count": 17,
+      "schema_matches_expected": true,
+      "date_min": "1999-11-01",
+      "date_max": "1999-11-30",
+      "outcome_counts_raw": {
+        "AGENT": 33371,
+        "HANG": 7351,
+        "PHANTOM": 297
+      },
+      "service_type_counts_raw": {
+        "IN": 3257,
+        "NE": 4418,
+        "NW": 5104,
+        "PE": 170,
+        "PS": 27156,
+        "TT": 914
+      },
+      "priority_counts_raw": {
+        "0": 21146,
+        "1": 6804,
+        "2": 13069
+      },
+      "blank_counts": {
+        "vru+line": 0,
+        "call_id": 0,
+        "customer_id": 0,
+        "priority": 0,
+        "type": 0,
+        "date": 0,
+        "vru_entry": 0,
+        "vru_exit": 0,
+        "vru_time": 0,
+        "q_start": 0,
+        "q_exit": 0,
+        "q_time": 0,
+        "outcome": 0,
+        "ser_start": 0,
+        "ser_exit": 0,
+        "ser_time": 0,
+        "server": 0
+      },
+      "invalid_duration_counts": {
+        "vru_time": 0,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "negative_duration_counts": {
+        "vru_time": 20,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "duplicate_vru_line_call_id_rows": 0,
+      "malformed_delimiter_rows": []
+    },
+    {
+      "file_name": "October1999.txt",
+      "size_bytes": 3495145,
+      "sha256": "078b3faccfbc86b8ca97d8c0ad2750119e6a36fd5184d058330e16f698a81932",
+      "row_count": 34625,
+      "column_count": 17,
+      "schema_matches_expected": true,
+      "date_min": "1999-10-01",
+      "date_max": "1999-10-31",
+      "outcome_counts_raw": {
+        "0:00:00": 2,
+        "AGENT": 30861,
+        "HANG": 3615,
+        "PHANTOM": 147
+      },
+      "service_type_counts_raw": {
+        "991026": 2,
+        "IN": 2986,
+        "NE": 2815,
+        "NW": 5221,
+        "PE": 141,
+        "PS": 23145,
+        "TT": 315
+      },
+      "priority_counts_raw": {
+        "0": 26101,
+        "0       IN": 1,
+        "0       NW": 1,
+        "1": 3203,
+        "2": 5319
+      },
+      "blank_counts": {
+        "vru+line": 0,
+        "call_id": 0,
+        "customer_id": 0,
+        "priority": 0,
+        "type": 0,
+        "date": 0,
+        "vru_entry": 0,
+        "vru_exit": 0,
+        "vru_time": 0,
+        "q_start": 0,
+        "q_exit": 0,
+        "q_time": 0,
+        "outcome": 0,
+        "ser_start": 0,
+        "ser_exit": 0,
+        "ser_time": 0,
+        "server": 2
+      },
+      "invalid_duration_counts": {
+        "vru_time": 2,
+        "q_time": 2,
+        "ser_time": 2
+      },
+      "negative_duration_counts": {
+        "vru_time": 4,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "duplicate_vru_line_call_id_rows": 0,
+      "malformed_delimiter_rows": [
+        {
+          "line_number": 7315,
+          "field_count": 16,
+          "expected_field_count": 17
+        },
+        {
+          "line_number": 14247,
+          "field_count": 16,
+          "expected_field_count": 17
+        }
+      ]
+    },
+    {
+      "file_name": "September1999.txt",
+      "size_bytes": 3190748,
+      "sha256": "a6d8a914d232b02b171279033ec8c87c3f607ed218a86c36c06847769a15f00d",
+      "row_count": 31371,
+      "column_count": 17,
+      "schema_matches_expected": true,
+      "date_min": "1999-09-01",
+      "date_max": "1999-09-30",
+      "outcome_counts_raw": {
+        "0:00:00": 1,
+        "AGENT": 27062,
+        "HANG": 4145,
+        "PHANTOM": 163
+      },
+      "service_type_counts_raw": {
+        "990914": 1,
+        "AA": 1,
+        "IN": 3139,
+        "NE": 2635,
+        "NW": 4340,
+        "PE": 113,
+        "PS": 20810,
+        "TT": 332
+      },
+      "priority_counts_raw": {
+        "0": 21085,
+        "0       TT": 1,
+        "1": 3626,
+        "2": 6659
+      },
+      "blank_counts": {
+        "vru+line": 0,
+        "call_id": 0,
+        "customer_id": 0,
+        "priority": 0,
+        "type": 0,
+        "date": 0,
+        "vru_entry": 0,
+        "vru_exit": 0,
+        "vru_time": 0,
+        "q_start": 0,
+        "q_exit": 0,
+        "q_time": 0,
+        "outcome": 0,
+        "ser_start": 0,
+        "ser_exit": 0,
+        "ser_time": 0,
+        "server": 1
+      },
+      "invalid_duration_counts": {
+        "vru_time": 1,
+        "q_time": 1,
+        "ser_time": 1
+      },
+      "negative_duration_counts": {
+        "vru_time": 14,
+        "q_time": 0,
+        "ser_time": 0
+      },
+      "duplicate_vru_line_call_id_rows": 0,
+      "malformed_delimiter_rows": [
+        {
+          "line_number": 9666,
+          "field_count": 16,
+          "expected_field_count": 17
+        }
+      ]
+    }
+  ],
+  "privacy": {
+    "contains_customer_ids": false,
+    "contains_agent_names": false,
+    "note": "Only counts and hashes are stored; raw identifiers are suppressed."
+  }
+}

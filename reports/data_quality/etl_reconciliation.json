@@ -1,0 +1,73 @@
+{
+  "report_version": "1.0.0",
+  "generated_at_utc": "2026-11-04T13:28:04.715818+00:00",
+  "source_timezone_assumption": "Asia/Jerusalem",
+  "summary": {
+    "raw_rows": 444448,
+    "clean_rows": 440844,
+    "excluded_rows": 3599,
+    "quarantine_rows": 5,
+    "repaired_rows": 12,
+    "interval_rows": 12834,
+    "interval_offered_calls": 440844,
+    "reconciliation_passed": true
+  },
+  "exclusion_reasons": {
+    "phantom_record": 3599
+  },
+  "quarantine_reasons": {
+    "unexpected_service_type": 5
+  },
+  "repair_codes": {
+    "split_merged_priority_service_type": 12
+  },
+  "quality_flags": {
+    "abandoned_with_agent_label": 10,
+    "answered_without_agent_label": 5216,
+    "negative_vru_duration": 332,
+    "queue_exit_midnight_rollover": 396,
+    "queue_start_midnight_rollover": 338,
+    "service_end_invalid_time_sequence": 5,
+    "service_end_midnight_rollover": 2909,
+    "service_start_invalid_time_sequence": 211,
+    "service_start_midnight_rollover": 2622,
+    "service_start_minor_clock_skew": 269428,
+    "vru_exit_implausible_elapsed_time": 3,
+    "vru_exit_invalid_time_sequence": 332,
+    "zero_service_duration": 1250
+  },
+  "source_issue_counts": {
+    "abandoned_with_agent_label": 10,
+    "answered_with_zero_service_duration": 1250,
+    "answered_without_agent_label": 5216,
+    "negative_vru_duration": 350,
+    "unexpected_service_type": 5
+  },
+  "agent_pseudonymization": {
+    "method": "deterministic sequential IDs from sorted source labels",
+    "agent_count": 52,
+    "raw_agent_labels_written_to_output": false
+  },
+  "privacy": {
+    "customer_id_written_to_output": false,
+    "raw_agent_label_written_to_output": false
+  },
+  "outputs": {
+    "calls_clean.csv.gz": {
+      "size_bytes": 18296046,
+      "sha256": "35a7853303c0116f3579782e1dd485516a82b8ab78170d6662b760afebff437f"
+    },
+    "calls_excluded.csv.gz": {
+      "size_bytes": 42481,
+      "sha256": "cbdd3aed92b70b1a3ba1e218e24e953a046cecdfee0f30c19cbb7feb28353875"
+    },
+    "calls_quarantine.csv.gz": {
+      "size_bytes": 318,
+      "sha256": "7e58320973cb17ff5001c9ad53994dd5206d5d9632e85d50929a2e9a872f88d8"
+    },
+    "calls_interval_30m.csv.gz": {
+      "size_bytes": 323364,
+      "sha256": "d4d8344040f98bd9362a62e7dc4eb9e99c7976a8f6d0b747ddfdb7c1376023d1"
+    }
+  }
+}
